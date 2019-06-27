@@ -9,7 +9,7 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentWeather from '@components/CurrentWeather'
+import CurrentWeather from '@components/Weather/CurrentTemp'
 
 type Props = {}
 export default class App extends Component<Props> {

@@ -1,22 +1,23 @@
 // @flow
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import Text from './Text'
-import { API_URL, OWM_API } from '../../config'
-import { getWeatherByLocation } from '../api'
-import { fahrenheitToCelsius, celsiusToFahrenheit } from '../utilities'
+import Text from '../Text'
+import { API_URL, OWM_API } from '../../../config'
+import { getWeatherByLocation } from '../../api'
+import { fahrenheitToCelsius, celsiusToFahrenheit } from '../../utilities'
 
 type Props = {
   long: number,
   lat: number,
 }
 
-function CurrentWeather({ long, lat }: Props) {
+function CurrentTemp({ long, lat }: Props) {
   const [temp, setTemp] = useState('')
   const [isFahrenheit, setIsFahrenheit] = useState(true)
 
   const getWeather = async () => {
-    const { main } = await getWeatherByLocation({lat, long}, )
+    const res = await getWeatherByLocation(lat, long)
+    const { main } = res
     setTemp(main.temp.toFixed(0))
   }
 
@@ -87,4 +88,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CurrentWeather
+export default CurrentTemp
