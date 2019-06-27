@@ -9,11 +9,14 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import RNLocation from 'react-native-location'
+import CurrentWeather from '@components/CurrentWeather'
 
 type Props = {}
 export default class App extends Component<Props> {
   state = {
     locationGranted: false,
+    longitude: null,
+    latitude: null,
   }
 
   componentDidMount() {
@@ -21,7 +24,6 @@ export default class App extends Component<Props> {
 
     this.permission = RNLocation.subscribeToPermissionUpdates(currentPermission => {
       if (currentPermission === 'authorizedWhenInUse') {
-        console.log('permission', currentPermission)
         this.getLocation()
       }
     })
@@ -38,8 +40,8 @@ export default class App extends Component<Props> {
   }
 
   getLocation = async () => {
-    const location = await RNLocation.getLatestLocation({ timeout: 60000 })
-    console.log(location)
+    const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
+    this.setState({ longitude, latitude })
   }
 
   componentWillUnmount() {
@@ -47,9 +49,10 @@ export default class App extends Component<Props> {
   }
   
   render() {
+    const { longitude, latitude } = this.state
     return (
       <View style={styles.container}>
-        
+        <CurrentWeather long={longitude} lat={latitude} />
       </View>
     )
   }
