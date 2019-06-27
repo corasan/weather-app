@@ -21,6 +21,12 @@ function CurrentTemp({ long, lat }: Props) {
     setTemp(main.temp.toFixed(0))
   }
 
+  useEffect(() => {
+    if (lat && long) {
+      getWeather()
+    }
+  }, [long, lat])
+
   const toggleUnit = () => {
     if (isFahrenheit) {
       setTemp(fahrenheitToCelsius(temp))
@@ -30,12 +36,6 @@ function CurrentTemp({ long, lat }: Props) {
       setIsFahrenheit(true)
     }
   }
-
-  useEffect(() => {
-    if (lat && long) {
-      getWeather()
-    }
-  }, [long, lat])
 
   return (
     <View style={styles.container}>

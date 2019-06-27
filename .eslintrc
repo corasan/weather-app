@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react-hooks"
+  ],
+  "parserOptions": {
+		"ecmaVersion": 2019,
+		"sourceType": "module",
+		"impliedStrict": true,
+		"ecmaFeatures": {
+			"jsx": true,
+			"impliedStrict": true,
+			"globalReturn": false,
+			"experimentalObjectRestSpread": true,
+      "legacyDecorators": true,
+      "module": true
+    }
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
