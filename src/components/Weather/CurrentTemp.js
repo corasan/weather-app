@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   btnContainers: {
     flexDirection: 'row',
-    marginLeft: 14,
+    marginLeft: 10,
     alignItems: 'center',
     height: 30,
   },

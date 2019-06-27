@@ -6,56 +6,62 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import RNLocation from 'react-native-location'
 import CurrentWeather from '@components/Weather/CurrentTemp'
+import WeatherLocation from '@components/Weather/WeatherLocation'
 
-type Props = {}
-export default class App extends Component<Props> {
-  state = {
-    locationGranted: false,
-    longitude: null,
-    latitude: null,
+export default function App() {
+  const [permission, setPermission] = useState(false)
+  const [longitude, setLongitude] = useState(null)
+  const [latitude, setLatitude] = useState(null)
+
+  useEffect(() => {
+    const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
+    checkPermission()
+
+    return function cleanup() {
+      permissionUpdate()
+    }
+  }, [])
+
+  const handlePermissionUpdate = (authorization) => {
+    if (authorization === 'authorizedWhenInUse') {
+      setPermission(true)
+    }
   }
 
-  componentDidMount() {
-    this.checkPermission()
-
-    this.permission = RNLocation.subscribeToPermissionUpdates(currentPermission => {
-      if (currentPermission === 'authorizedWhenInUse') {
-        this.getLocation()
-      }
-    })
-  }
+  useEffect(() => {
+    if (!permission) {
+      requestPermission()
+    } else {
+      getLocation()
+    }
+  }, [permission])
 
   checkPermission = async () => {
-    const permission = await RNLocation.checkPermission({ ios: 'whenInUse' })
-    this.setState({ permission })
-    if (!permission) {
-      await RNLocation.requestPermission({ ios: 'whenInUse' });
-    } else {
-      this.getLocation()
-    }
+    const result = await RNLocation.checkPermission({ ios: 'whenInUse' })
+    setPermission(result)
+  }
+
+  const requestPermission = async () => {
+    const result = await RNLocation.requestPermission({ ios: 'whenInUse' });
+    setPermission(result)
   }
 
   getLocation = async () => {
     const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    this.setState({ longitude, latitude })
-  }
-
-  componentWillUnmount() {
-    this.permission()
+    setLatitude(latitude)
+    setLongitude(longitude)
   }
   
-  render() {
-    const { longitude, latitude } = this.state
-    return (
-      <View style={styles.container}>
-        <CurrentWeather long={longitude} lat={latitude} />
-      </View>
-    )
-  }
+  return (
+    <View style={styles.container}>
+      <WeatherLocation />
+      <CurrentWeather long={longitude} lat={latitude} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
