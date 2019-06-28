@@ -3,36 +3,26 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Text from '../Text'
 import { API_URL, OWM_API } from '../../../config'
-import { getWeatherByLocation } from '../../api'
-import { fahrenheitToCelsius, celsiusToFahrenheit } from '../../utilities'
+import { fahrenheitToCelsius, celsiusToFahrenheit } from '../../utils'
 
 type Props = {
-  long: number,
-  lat: number,
+  temp: number,
 }
 
-function CurrentTemp({ long, lat }: Props) {
-  const [temp, setTemp] = useState('')
+function CurrentTemp({ temp }: Props) {
+  const [unitTemp, setUnit] = useState(0)
   const [isFahrenheit, setIsFahrenheit] = useState(true)
 
-  const getWeather = async () => {
-    const res = await getWeatherByLocation(lat, long)
-    const { main } = res
-    setTemp(main.temp.toFixed(0))
-  }
-
   useEffect(() => {
-    if (lat && long) {
-      getWeather()
-    }
-  }, [long, lat])
+    setUnit(temp)
+  }, [temp])
 
   const toggleUnit = () => {
     if (isFahrenheit) {
-      setTemp(fahrenheitToCelsius(temp))
+      setUnit(fahrenheitToCelsius(unitTemp))
       setIsFahrenheit(false)
     } else {
-      setTemp(celsiusToFahrenheit(temp))
+      setUnit(celsiusToFahrenheit(unitTemp))
       setIsFahrenheit(true)
     }
   }
@@ -40,7 +30,7 @@ function CurrentTemp({ long, lat }: Props) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.temp}>{temp}</Text>
+        <Text style={styles.temp}>{unitTemp}</Text>
         <View style={styles.btnContainers}>
           <TouchableOpacity
             onPress={toggleUnit}

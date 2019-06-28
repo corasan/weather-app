@@ -2,7 +2,6 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  *
- * @format
  * @flow
  */
 
@@ -11,11 +10,14 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 import RNLocation from 'react-native-location'
 import CurrentWeather from '@components/Weather/CurrentTemp'
 import WeatherLocation from '@components/Weather/WeatherLocation'
+import { getWeatherByLocation } from './src/api'
 
 export default function App() {
   const [permission, setPermission] = useState(false)
-  const [longitude, setLongitude] = useState(null)
-  const [latitude, setLatitude] = useState(null)
+  const [longitude, setLongitude] = useState(0)
+  const [latitude, setLatitude] = useState(0)
+  const [tempInfo, setTempInfo] = useState(null)
+  const [city, setCity] = useState('')
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -36,11 +38,11 @@ export default function App() {
     if (!permission) {
       requestPermission()
     } else {
-      getLocation()
+      getWeather()
     }
   }, [permission])
 
-  checkPermission = async () => {
+  const checkPermission = async () => {
     const result = await RNLocation.checkPermission({ ios: 'whenInUse' })
     setPermission(result)
   }
@@ -50,16 +52,19 @@ export default function App() {
     setPermission(result)
   }
 
-  getLocation = async () => {
+  const getWeather = async () => {
     const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    setLatitude(latitude)
-    setLongitude(longitude)
+    const res = await getWeatherByLocation(latitude, longitude)
+    const { main, name, dt } = res
+    setTempInfo(main)
+    setCity(name)
   }
   
   return (
     <View style={styles.container}>
-      <WeatherLocation />
-      <CurrentWeather long={longitude} lat={latitude} />
+      <WeatherLocation city={city} />
+      {/* $FlowFixMe */}
+      <CurrentWeather temp={tempInfo?.temp.toFixed(0)} />
     </View>
   )
 }
