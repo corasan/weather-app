@@ -54,8 +54,7 @@ export default function App() {
 
   const getWeather = async () => {
     const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    const res = await getWeatherByLocation(latitude, longitude)
-    const { main, name, dt } = res
+    const { main, name, weahter, wind, sys } = await getWeatherByLocation(latitude, longitude)
     setTempInfo(main)
     setCity(name)
   }
