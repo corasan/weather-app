@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   line: {
-    height: '75%',
+    height: '60%',
     width: 1,
     backgroundColor: 'black',
     marginLeft: 10,
