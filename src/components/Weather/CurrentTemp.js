@@ -4,49 +4,37 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Text from '../Text'
 import { API_URL, OWM_API } from '../../../config'
 import { fahrenheitToCelsius, celsiusToFahrenheit } from '../../utils'
+import UnitButton from './UnitButton'
 
 type Props = {
   temp: number,
 }
 
 function CurrentTemp({ temp }: Props) {
-  const [unitTemp, setUnit] = useState(0)
   const [isFahrenheit, setIsFahrenheit] = useState(true)
 
-  useEffect(() => {
-    setUnit(temp)
-  }, [temp])
-
   const toggleUnit = () => {
-    if (isFahrenheit) {
-      setUnit(fahrenheitToCelsius(unitTemp))
-      setIsFahrenheit(false)
-    } else {
-      setUnit(celsiusToFahrenheit(unitTemp))
-      setIsFahrenheit(true)
-    }
+    setIsFahrenheit(!isFahrenheit)
   }
+
+  const converted = isFahrenheit ? temp : fahrenheitToCelsius(temp)
 
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.temp}>{unitTemp}</Text>
+        <Text style={styles.temp}>{converted}</Text>
         <View style={styles.btnContainers}>
-          <TouchableOpacity
-            onPress={toggleUnit}
+          <UnitButton
+            toggleUnit={toggleUnit}
             disabled={isFahrenheit}
-            style={{ opacity: isFahrenheit ? 0.4 : 1 }}
-          >
-            <Text style={styles.degreeText}>ºF</Text>
-          </TouchableOpacity>
+            unit="F"
+          />
           <View style={styles.line} />
-          <TouchableOpacity
-            onPress={toggleUnit}
+          <UnitButton
+            toggleUnit={toggleUnit}
             disabled={!isFahrenheit}
-            style={{ opacity: !isFahrenheit ? 0.4 : 1 }}
-          >
-            <Text style={styles.degreeText}>ºC</Text>
-          </TouchableOpacity>
+            unit="C"
+          />
         </View>
       </View>
     </View>
@@ -59,9 +47,6 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 38,
-  },
-  degreeText: {
-    fontSize: 20
   },
   btnContainers: {
     flexDirection: 'row',
