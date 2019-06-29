@@ -9,9 +9,8 @@
 #import "React/RCTBridgeModule.h"
 #import "React/RCTEventEmitter.h"
 
-@interface RCT_EXTERN_REMAP_MODULE(RNClock, Clock, RCTEventEmitter)
+@interface RCT_EXTERN_MODULE(RNClock, RCTEventEmitter)
 
-RCT_EXTERN_METHOD(runTimer)
-RCT_EXTERN_METHOD(time)
+RCT_EXTERN_METHOD(initClock)
 
 @end

@@ -8,9 +8,10 @@
 
 import Foundation
 
-@objc(Clock)
-class Clock: RCTEventEmitter {
+@objc(RNClock)
+class RNClock: RCTEventEmitter {
   var timer: Timer = Timer()
+  var hasListeners: Bool = false
 
   @objc
   override static func requiresMainQueueSetup() -> Bool {
@@ -18,19 +19,27 @@ class Clock: RCTEventEmitter {
   }
   
   override func supportedEvents() -> [String]! {
-    return ["onTimeChange", "onTimerRunning"]
+    return ["onTimeChange"]
+  }
+  
+  override func startObserving() {
+    hasListeners = true
+  }
+  
+  override func stopObserving() {
+    hasListeners = false
   }
   
   @objc
-  func runTimer() {
+  func initClock() {
     DispatchQueue.main.async(execute: {
       Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.time), userInfo: nil, repeats: true)
     })
   }
   
-  @objc
+  @objc private
   func time() {
-    let currentTime = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
+    let currentTime = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
     sendEvent(withName: "onTimeChange", body: ["currentTime": currentTime])
   }
 

@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { NativeModules, NativeEventEmitter } from 'react-native'
 
+const { RNClock } = NativeModules
+const ClockEvents = new NativeEventEmitter(RNClock)
+
 type Props = {
   city: string,
 }
@@ -10,22 +13,19 @@ type Props = {
 function WeatherLocation({ city }: Props) {
   const currentDate = new Date()
   const day = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(currentDate)
-  const { RNClock } = NativeModules
-  const ClockEvents = new NativeEventEmitter(RNClock)
   const [time, setTime] = useState('')
   
   useEffect(() => {
-    RNClock.runTimer()
+    RNClock.initClock()
     
-    const clock = ClockEvents.addListener(
-      "onTimeChange",
-      ({ currentTime }) => setTime(currentTime)
-    )
+    const clock = ClockEvents.addListener('onTimeChange', ({ currentTime }) => {
+      setTime(currentTime)
+    })
 
     return function cleanup() {
       clock.remove()
     }
-  }, [])
+  })
   
   return (
     <View>
