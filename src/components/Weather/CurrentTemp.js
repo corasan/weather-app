@@ -31,8 +31,7 @@ function CurrentTemp({ temp, weather }: Props) {
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
         <View style={styles.center}>
-          <Image source={{ uri }} style={{ height: 80, width: 80 }} />
-          <Text style={styles.description}>{description}</Text>
+          <Image source={{ uri }} style={{ height: 90, width: 90 }} />
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.temp}>{converted}</Text>
@@ -87,7 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    marginTop: -10,
   },
 })
 
