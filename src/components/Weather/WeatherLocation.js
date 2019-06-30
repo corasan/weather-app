@@ -41,7 +41,7 @@ function WeatherLocation({ city }: Props) {
 
 const styles = StyleSheet.create({
   city: {
-    fontSize: 26,
+    fontSize: 30,
   },
   day: {
     fontSize: 18,
