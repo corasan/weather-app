@@ -8,7 +8,7 @@ const UnitButton = ({ toggleUnit, disabled, unit }) => (
     disabled={disabled}
     style={{ opacity: disabled ? 0.4 : 1 }}
   >
-    <Text style={{ fontSize: 20 }}>{`º${unit}`}</Text>
+    <Text style={{ fontSize: 22 }}>{`º${unit}`}</Text>
   </TouchableOpacity>
 )
 

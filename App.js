@@ -18,6 +18,7 @@ export default function App() {
   const [latitude, setLatitude] = useState(0)
   const [tempInfo, setTempInfo] = useState(null)
   const [city, setCity] = useState('')
+  const [weather, setWeather] = useState({})
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -54,9 +55,12 @@ export default function App() {
 
   const getWeather = async () => {
     const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    const { main, name, weahter, wind, sys } = await getWeatherByLocation(latitude, longitude)
+    const { main, name, weather, wind, sys } = await getWeatherByLocation(latitude, longitude)
     setTempInfo(main)
     setCity(name)
+    setWeather(weather[0])
+    console.log(weather[0])
+
   }
   
   return (
@@ -64,7 +68,7 @@ export default function App() {
       <View style={styles.container}>
         <WeatherLocation city={city} />
         {/* $FlowFixMe */}
-        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} />
+        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} weather={weather} />
       </View>
     </SafeAreaView>
   )
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: 30,
     paddingTop: 20,
   },
   welcome: {
