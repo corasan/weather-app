@@ -10,9 +10,10 @@ import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
 import CurrentTemp from '@components/Weather/CurrentTemp'
 import WeatherLocation from '@components/Weather/WeatherLocation'
+import codePush from 'react-native-code-push';
 import { getWeatherByLocation } from './src/api'
 
-export default function App() {
+function App() {
   const [permission, setPermission] = useState(false)
   const [longitude, setLongitude] = useState(0)
   const [latitude, setLatitude] = useState(0)
@@ -59,8 +60,6 @@ export default function App() {
     setTempInfo(main)
     setCity(name)
     setWeather(weather[0])
-    console.log(weather[0])
-
   }
   
   return (
@@ -73,6 +72,8 @@ export default function App() {
     </SafeAreaView>
   )
 }
+
+export default codePush(App)
 
 const styles = StyleSheet.create({
   container: {
