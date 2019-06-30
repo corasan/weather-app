@@ -40,7 +40,9 @@ class RNClock: RCTEventEmitter {
   @objc private
   func time() {
     let currentTime = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
-    sendEvent(withName: "onTimeChange", body: ["currentTime": currentTime])
+    let formatter = DateFormatter()
+    formatter.dateFormat = "EEEE"
+    sendEvent(withName: "onTimeChange", body: ["currentTime": currentTime, "day": formatter.string(from: Date()).capitalized ])
   }
 
 }

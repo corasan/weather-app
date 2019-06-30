@@ -11,15 +11,15 @@ type Props = {
 }
 
 function WeatherLocation({ city }: Props) {
-  const currentDate = new Date()
-  const day = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(currentDate)
   const [time, setTime] = useState('')
+  const [day, setDay] = useState('')
   
   useEffect(() => {
     RNClock.initClock()
     
-    const clock = ClockEvents.addListener('onTimeChange', ({ currentTime }) => {
+    const clock = ClockEvents.addListener('onTimeChange', ({ currentTime, day }) => {
       setTime(currentTime)
+      setDay(day)
     })
 
     return function cleanup() {
@@ -30,6 +30,7 @@ function WeatherLocation({ city }: Props) {
   return (
     <View>
       <Text>{city}</Text>
+      <Text>{day}</Text>
       <Text>{time}</Text>
     </View>
   )
