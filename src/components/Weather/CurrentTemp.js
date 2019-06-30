@@ -43,10 +43,10 @@ function CurrentTemp({ temp }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-
+    marginTop: 60,
   },
   temp: {
-    fontSize: 38,
+    fontSize: 48,
   },
   btnContainers: {
     flexDirection: 'row',

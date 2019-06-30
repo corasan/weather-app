@@ -6,9 +6,9 @@
  */
 
 import React, { Component, useState, useEffect } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentWeather from '@components/Weather/CurrentTemp'
+import CurrentTemp from '@components/Weather/CurrentTemp'
 import WeatherLocation from '@components/Weather/WeatherLocation'
 import { getWeatherByLocation } from './src/api'
 
@@ -60,20 +60,23 @@ export default function App() {
   }
   
   return (
-    <View style={styles.container}>
-      <WeatherLocation city={city} />
-      {/* $FlowFixMe */}
-      <CurrentWeather temp={tempInfo?.temp.toFixed(0)} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <WeatherLocation city={city} />
+        {/* $FlowFixMe */}
+        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} />
+      </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    width: '100%',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingHorizontal: 24,
+    paddingTop: 20,
   },
   welcome: {
     fontSize: 20,

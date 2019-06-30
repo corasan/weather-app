@@ -1,7 +1,8 @@
 // @flow
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { NativeModules, NativeEventEmitter } from 'react-native'
+import Text from '../Text'
 
 const { RNClock } = NativeModules
 const ClockEvents = new NativeEventEmitter(RNClock)
@@ -28,12 +29,24 @@ function WeatherLocation({ city }: Props) {
   })
   
   return (
-    <View>
-      <Text>{city}</Text>
-      <Text>{day}</Text>
-      <Text>{time}</Text>
+    <View style={{ width: '100%' }}>
+      <Text style={styles.city}>{city}</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={styles.day}>{day}</Text>
+        <Text style={[styles.day, { marginLeft: 10 }]}>{time}</Text>
+      </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  city: {
+    fontSize: 26,
+  },
+  day: {
+    fontSize: 18,
+    opacity: 0.8,
+  },
+})
 
 export default WeatherLocation
