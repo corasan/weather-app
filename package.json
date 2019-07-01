@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "cp-staging": "appcenter codepush release-react -a corasan/WeatherApp -s Staging",
+    "cp-production": "appcenter codepush release-react -a corasan/WeatherApp -d Production"
   },
   "dependencies": {
     "appcenter": "^2.1.0",
