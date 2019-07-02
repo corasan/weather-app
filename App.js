@@ -6,18 +6,20 @@
  */
 
 import React, { Component, useState, useEffect } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentWeather from '@components/Weather/CurrentTemp'
+import CurrentTemp from '@components/Weather/CurrentTemp'
 import WeatherLocation from '@components/Weather/WeatherLocation'
+import codePush from 'react-native-code-push';
 import { getWeatherByLocation } from './src/api'
 
-export default function App() {
+function App() {
   const [permission, setPermission] = useState(false)
   const [longitude, setLongitude] = useState(0)
   const [latitude, setLatitude] = useState(0)
   const [tempInfo, setTempInfo] = useState(null)
   const [city, setCity] = useState('')
+  const [weather, setWeather] = useState({})
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -54,26 +56,32 @@ export default function App() {
 
   const getWeather = async () => {
     const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    const { main, name, weahter, wind, sys } = await getWeatherByLocation(latitude, longitude)
+    const { main, name, weather, wind, sys } = await getWeatherByLocation(latitude, longitude)
     setTempInfo(main)
     setCity(name)
+    setWeather(weather[0])
   }
   
   return (
-    <View style={styles.container}>
-      <WeatherLocation city={city} />
-      {/* $FlowFixMe */}
-      <CurrentWeather temp={tempInfo?.temp.toFixed(0)} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <WeatherLocation city={city} />
+        {/* $FlowFixMe */}
+        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} weather={weather} />
+      </View>
+    </SafeAreaView>
   )
 }
+
+export default codePush(App)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    width: '100%',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingHorizontal: 30,
+    paddingTop: 20,
   },
   welcome: {
     fontSize: 20,
