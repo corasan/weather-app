@@ -18,7 +18,7 @@ type Props = {
 
 function CurrentTemp({ temp, weather }: Props) {
   const [isFahrenheit, setIsFahrenheit] = useState(true)
-  const { icon, description }: Weather = weather
+  const { icon, main }: Weather = weather
   const uri = `https://openweathermap.org/img/wn/${icon}@2x.png`
 
   const toggleUnit = () => {
@@ -31,7 +31,8 @@ function CurrentTemp({ temp, weather }: Props) {
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
         <View style={styles.center}>
-          <Image source={{ uri }} style={{ height: 90, width: 90 }} />
+          <Image source={{ uri }} style={{ height: 95, width: 95 }} />
+          <Text style={styles.description}>{main}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.temp}>{converted}</Text>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   temp: {
-    fontSize: 62,
+    fontSize: 72,
   },
   btnContainers: {
     flexDirection: 'row',
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
   description: {
-    fontSize: 10,
+    fontSize: 12,
     letterSpacing: 0.5,
     marginTop: -15,
     opacity: 0.5,
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
+    marginTop: -10
   },
 })
 

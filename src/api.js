@@ -1,7 +1,8 @@
+// @flow
 import { API_URL, OWM_API } from '../config'
 
-function get(query) {
-  return fetch(`${API_URL}?${query}&units=imperial&APPID=${OWM_API}`, {
+function get(query: string, apiEndpoint: string = 'weather') {
+  return fetch(`${API_URL}/${apiEndpoint}?${query}&units=imperial&APPID=${OWM_API}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -9,8 +10,14 @@ function get(query) {
   })
 }
 
-export async function getWeatherByLocation(lat, long) {
+export async function getWeatherByLocation(lat: number, long: number) {
   const res = await get(`lat=${lat}&lon=${long}`)
   const resObj = await res.json()
+  return resObj
+}
+
+export async function getForecastByLocation(lat: number, long: number) {
+  const res = await get(`lat=${lat}&lon=${long}`, 'forecast')
+  const resObj = await  res.json()
   return resObj
 }
