@@ -16,7 +16,7 @@ export async function getWeatherByLocation(lat: number, long: number) {
   return resObj
 }
 
-export async function getForecastByLocation(lat: number, long: number) {
+export async function getDailyForecastByLocation(lat: number, long: number) {
   const res = await get(`lat=${lat}&lon=${long}`, 'forecast')
   const resObj = await  res.json()
   return resObj

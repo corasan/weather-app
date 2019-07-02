@@ -12,7 +12,7 @@ import CurrentTemp from '@components/Weather/CurrentTemp'
 import WeatherLocation from '@components/Weather/WeatherLocation'
 import Forecast from '@components/Weather/Forecast';
 import codePush from 'react-native-code-push';
-import { getWeatherByLocation, getForecastByLocation } from './src/api'
+import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 
 function App() {
   const [permission, setPermission] = useState(false)
@@ -32,7 +32,7 @@ function App() {
     }
   }, [])
 
-  const handlePermissionUpdate = (authorization) => {
+  const handlePermissionUpdate = (authorization: string) => {
     if (authorization === 'authorizedWhenInUse') {
       setPermission(true)
     }
@@ -63,9 +63,9 @@ function App() {
   }
 
   useEffect(() => {
-    const getWeather = async (lat, long) => {
+    const getWeather = async () => {
       const { main, name, weather, wind, sys } = await getWeatherByLocation(latitude, longitude)
-      const { list } = await getForecastByLocation(latitude, longitude)
+      const { list } = await getDailyForecastByLocation(latitude, longitude)
       setTempInfo(main)
       setCity(name)
       setWeather(weather[0])
