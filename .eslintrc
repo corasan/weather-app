@@ -20,6 +20,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": "off"
+    "prettier/prettier": "off",
+    "semi": "off",
+    "react-native/no-inline-styles": "off"
   }
 }
