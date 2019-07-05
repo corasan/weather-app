@@ -1,14 +1,14 @@
 // @flow
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet, Image } from 'react-native'
 import Text from '../Text'
-import { API_URL, OWM_API } from '../../../config'
-import { fahrenheitToCelsius, celsiusToFahrenheit } from '../../utils'
+import { fahrenheitToCelsius } from '../../utils'
 import UnitButton from './UnitButton'
 
 type Weather = {
   icon: string,
   description: string,
+  main: {},
 }
 
 type Props = {
