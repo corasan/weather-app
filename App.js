@@ -13,7 +13,6 @@ function App() {
   const [permission, setPermission] = useState(false)
   const [longitude, setLongitude] = useState(0)
   const [latitude, setLatitude] = useState(0)
-  // const [tempInfo, setTempInfo] = useState({})
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState({})
   const [forecast, setForecast] = useState([])
