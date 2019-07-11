@@ -1,11 +1,11 @@
 // @flow
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { NativeModules, NativeEventEmitter } from 'react-native'
+// import { NativeModules, NativeEventEmitter } from 'react-native'
 import Text from '../Text'
 
-const { RNClock } = NativeModules
-const ClockEvents = new NativeEventEmitter(RNClock)
+// const { RNClock } = NativeModules
+// const ClockEvents = new NativeEventEmitter(RNClock)
 
 type Props = {
   city: string,
@@ -14,20 +14,20 @@ type Props = {
 function WeatherLocation({ city }: Props) {
   const [time, setTime] = useState('')
   const [day, setDay] = useState('')
-  
-  useEffect(() => {
-    RNClock.initClock()
-    
-    const clock = ClockEvents.addListener('onTimeChange', ({ currentTime, day }) => {
-      setTime(currentTime)
-      setDay(day)
-    })
 
-    return function cleanup() {
-      clock.remove()
-    }
+  useEffect(() => {
+    // RNClock.initClock()
+
+    // const clock = ClockEvents.addListener('onTimeChange', ({ currentTime, day }) => {
+    //   setTime(currentTime)
+    //   setDay(day)
+    // })
+
+    // return function cleanup() {
+    //   clock.remove()
+    // }
   })
-  
+
   return (
     <View style={{ width: '100%' }}>
       <Text style={styles.city}>{city}</Text>
