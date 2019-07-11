@@ -1,31 +1,20 @@
 // @flow
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import Text from '../Text'
-import { fahrenheitToCelsius } from '../../utils'
 import UnitButton from './UnitButton'
+import Context from '../../context'
 
-type Weather = {
-  icon: string,
-  description: string,
-  main: {},
-}
+type Weather = any
 
 type Props = {
-  temp: number,
   weather: Weather,
 }
 
-function CurrentTemp({ temp, weather }: Props) {
-  const [isFahrenheit, setIsFahrenheit] = useState(true)
-  const { icon, main }: Weather = weather
+function CurrentTemp({ weather }: Props) {
+  const { icon, main } = weather
   const uri = `https://openweathermap.org/img/wn/${icon}@2x.png`
-
-  const toggleUnit = () => {
-    setIsFahrenheit(!isFahrenheit)
-  }
-
-  const converted = isFahrenheit ? temp : fahrenheitToCelsius(temp)
+  const { temp, toggleUnit, isFahrenheit } = useContext(Context)
 
   return (
     <View style={styles.container}>
@@ -35,7 +24,7 @@ function CurrentTemp({ temp, weather }: Props) {
           <Text style={styles.description}>{main}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.temp}>{converted}</Text>
+          <Text style={styles.temp}>{temp.toFixed(0)}</Text>
           <View style={styles.btnContainers}>
             <UnitButton
               toggleUnit={toggleUnit}

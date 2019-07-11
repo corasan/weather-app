@@ -5,23 +5,27 @@
  * @flow
  */
 
-import React, { Component, useState, useEffect, useCallback } from 'react'
-import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentTemp from '@components/Weather/CurrentTemp'
-import WeatherLocation from '@components/Weather/WeatherLocation'
-import Forecast from '@components/Weather/Forecast';
+import CurrentTemp from '@components/CurrentWeather/CurrentTemp'
+import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
+import Forecast from '@components/Forecast';
 import codePush from 'react-native-code-push';
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
+import Context from './src/context'
+import { fahrenheitToCelsius } from './src/utils'
 
 function App() {
   const [permission, setPermission] = useState(false)
   const [longitude, setLongitude] = useState(0)
   const [latitude, setLatitude] = useState(0)
-  const [tempInfo, setTempInfo] = useState(null)
+  // const [tempInfo, setTempInfo] = useState({})
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState({})
   const [forecast, setForecast] = useState([])
+  const [isFahrenheit, setIsFahrenheit] = useState(true)
+  const [temp, setTemp] = useState(0)
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -57,34 +61,44 @@ function App() {
   }
 
   const setCurrentLocation = async () => {
-    const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    setLatitude(latitude)
-    setLongitude(longitude)
+    const { longitude: long, latitude: lat } = await RNLocation.getLatestLocation({ timeout: 60000 })
+    setLatitude(lat)
+    setLongitude(long)
   }
 
   useEffect(() => {
     const getWeather = async () => {
-      const { main, name, weather, wind, sys } = await getWeatherByLocation(latitude, longitude)
+      const { main, name, weather: weath } = await getWeatherByLocation(latitude, longitude)
       const { list } = await getDailyForecastByLocation(latitude, longitude)
-      setTempInfo(main)
+      setTemp(main?.temp)
       setCity(name)
-      setWeather(weather[0])
+      setWeather(weath[0])
       setForecast(list)
     }
-    
+
     getWeather()
   }, [latitude, longitude])
 
-  
+  const toggleUnit = () => {
+    setIsFahrenheit(!isFahrenheit)
+  }
+
+  const context = {
+    toggleUnit,
+    temp: isFahrenheit ? temp : fahrenheitToCelsius(temp),
+    isFahrenheit,
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <WeatherLocation city={city} />
-        {/* $FlowFixMe */}
-        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} weather={weather} />
+      <Context.Provider value={context}>
+        <View style={styles.container}>
+          <WeatherLocation city={city} />
+          <CurrentTemp weather={weather} />
 
-        <Forecast data={forecast} />
-      </View>
+          <Forecast data={forecast} />
+        </View>
+      </Context.Provider>
     </SafeAreaView>
   )
 }

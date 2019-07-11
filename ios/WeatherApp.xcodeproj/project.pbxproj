@@ -645,6 +645,7 @@
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WeatherApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -670,6 +671,7 @@
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WeatherApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -961,6 +963,7 @@
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WeatherApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
