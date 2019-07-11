@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @flow
- */
-
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
