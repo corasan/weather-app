@@ -13,7 +13,7 @@ function ForecastItem({ main, dt_txt, weather }: ForecastType): React$Element<an
   const uri = `https://openweathermap.org/img/wn/${icon}@2x.png`
 
   const temp = isFahrenheit ? temp_max : fahrenheitToCelsius(temp_max)
-  const unit =isFahrenheit ? 'F' : 'C'
+  const unit = isFahrenheit ? 'F' : 'C'
 
   return (
     <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
