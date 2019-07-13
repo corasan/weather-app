@@ -21,8 +21,6 @@
 		59021D57A30B92E8914E6B15 /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A37588926BEB6F29DEAAD5 /* libPods-WeatherApp.a */; };
 		7BAA99B492FA258C0ABF65A9 /* libPods-WeatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D06A5AB9B895802ADF9CF6D /* libPods-WeatherAppTests.a */; };
 		836280E31C83CEB0B0B673C9 /* Pods_WeatherApp_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5EA550ACC58E4769D6F529 /* Pods_WeatherApp_tvOS.framework */; };
-		CAE7DFC422C6FD6300538690 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE7DFC322C6FD6300538690 /* Clock.swift */; };
-		CAE7DFF522C7001900538690 /* Clock.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE7DFF422C7001900538690 /* Clock.m */; };
 		CC44D853019DF8720F726821 /* Pods_WeatherApp_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D800DEB3CE2754536B36F8 /* Pods_WeatherApp_tvOSTests.framework */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
@@ -77,8 +75,6 @@
 		8D06A5AB9B895802ADF9CF6D /* libPods-WeatherAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06610B05ECEF160935BD750 /* Pods-WeatherApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp-tvOSTests/Pods-WeatherApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAE7DFC222C6FD6300538690 /* WeatherApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		CAE7DFC322C6FD6300538690 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
-		CAE7DFF422C7001900538690 /* Clock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clock.m; sourceTree = "<group>"; };
 		E81441358FE3B4F88AAC5924 /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -162,7 +158,6 @@
 		13B07FAE1A68108700A75B9A /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				CAE7DFF022C6FF4600538690 /* Clock */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -222,15 +217,6 @@
 				2D02E4901E0B4A5D006451C7 /* WeatherApp-tvOSTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		CAE7DFF022C6FF4600538690 /* Clock */ = {
-			isa = PBXGroup;
-			children = (
-				CAE7DFF422C7001900538690 /* Clock.m */,
-				CAE7DFC322C6FD6300538690 /* Clock.swift */,
-			);
-			path = Clock;
 			sourceTree = "<group>";
 		};
 		CAFD23CB22C2FED1003FE824 /* Recovered References */ = {
@@ -535,9 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE7DFC422C6FD6300538690 /* Clock.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				CAE7DFF522C7001900538690 /* Clock.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,7 +575,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0553E953745FB4558F11D8AC /* Pods-WeatherAppTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -616,7 +599,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E81441358FE3B4F88AAC5924 /* Pods-WeatherAppTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -982,7 +964,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E178B10B283E00EACA9430E /* Pods-WeatherAppTests.staging.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";

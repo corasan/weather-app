@@ -3,8 +3,10 @@ import { StyleSheet, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
 import CurrentTemp from '@components/CurrentWeather/CurrentTemp'
 import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
-import Forecast from '@components/Forecast';
-import codePush from 'react-native-code-push';
+import Forecast from '@components/Forecast'
+import NoLocation from '@components/NoLocation'
+import codePush from 'react-native-code-push'
+
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
 import { fahrenheitToCelsius } from './src/utils'
@@ -31,6 +33,8 @@ function App() {
   const handlePermissionUpdate = (authorization: string) => {
     if (authorization === 'authorizedWhenInUse') {
       setPermission(true)
+    } else {
+      setPermission(false)
     }
   }
 
@@ -83,14 +87,17 @@ function App() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Context.Provider value={context}>
-        <View style={styles.container}>
-          <WeatherLocation city={city} />
-          <CurrentTemp weather={weather} />
+      {permission ? (
+        <Context.Provider value={context}>
+          <View style={styles.container}>
+            <WeatherLocation city={city} />
+            <CurrentTemp weather={weather} />
 
-          <Forecast data={forecast} />
-        </View>
-      </Context.Provider>
+            <Forecast data={forecast} />
+          </View>
+        </Context.Provider>
+      ) : <NoLocation />
+      }
     </SafeAreaView>
   )
 }
