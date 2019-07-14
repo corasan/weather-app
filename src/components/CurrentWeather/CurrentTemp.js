@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-import Text from '../Text'
+import Text from '@components/Text'
 import UnitButton from './UnitButton'
 import Context from '../../context'
 

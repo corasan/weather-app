@@ -2,7 +2,13 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import Text from '../Text'
 
-const UnitButton = ({ toggleUnit, disabled, unit }) => (
+type Props = {
+  toggleUnit(): void,
+  disabled: boolean,
+  unit: string,
+}
+
+const UnitButton = ({ toggleUnit, disabled, unit }: Props): React$Element<any> => (
   <TouchableOpacity
     onPress={toggleUnit}
     disabled={disabled}
