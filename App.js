@@ -6,6 +6,7 @@ import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
 import Forecast from '@components/Forecast'
 import NoLocation from '@components/NoLocation'
 import codePush from 'react-native-code-push'
+import WeatherDetails from '@components/WeatherDetails'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
@@ -20,6 +21,7 @@ function App() {
   const [forecast, setForecast] = useState([])
   const [isFahrenheit, setIsFahrenheit] = useState(true)
   const [temp, setTemp] = useState(0)
+  const [details, setDetails] = useState({})
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -70,9 +72,12 @@ function App() {
       setCity(name)
       setWeather(weath[0])
       setForecast(list)
+      setDetails(main)
     }
 
-    getWeather()
+    if (latitude && longitude) {
+      getWeather()
+    }
   }, [latitude, longitude])
 
   const toggleUnit = () => {
@@ -83,15 +88,17 @@ function App() {
     toggleUnit,
     temp: isFahrenheit ? temp : fahrenheitToCelsius(temp),
     isFahrenheit,
+    details,
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {permission ? (
+      {permission && (longitude && latitude) ? (
         <Context.Provider value={context}>
           <View style={styles.container}>
             <WeatherLocation city={city} />
             <CurrentTemp weather={weather} />
+            <WeatherDetails />
 
             <Forecast data={forecast} />
           </View>

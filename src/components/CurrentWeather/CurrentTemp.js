@@ -1,4 +1,3 @@
-// @flow
 import React, { useContext } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import Text from '@components/Text'
@@ -24,7 +23,7 @@ function CurrentTemp({ weather }: Props) {
           <Text style={styles.description}>{main}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.temp}>{temp.toFixed(0)}</Text>
+          <Text style={styles.temp}>{temp ? temp.toFixed(0) : 0}</Text>
           <View style={styles.btnContainers}>
             <UnitButton
               toggleUnit={toggleUnit}
