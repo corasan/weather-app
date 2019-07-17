@@ -29,6 +29,8 @@ target 'WeatherApp' do
   pod 'appcenter-analytics', :path => '../node_modules/appcenter-analytics/ios'
   pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes/ios'
 
+  pod 'Google-Mobile-Ads-SDK'
+
   target 'WeatherAppTests' do
     inherit! :search_paths
     # Pods for testing
