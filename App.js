@@ -7,6 +7,7 @@ import Forecast from '@components/Forecast'
 import NoLocation from '@components/NoLocation'
 import codePush from 'react-native-code-push'
 import WeatherDetails from '@components/WeatherDetails'
+import Analytics from 'appcenter-analytics'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
@@ -74,6 +75,7 @@ function App() {
       setWeather(weath[0])
       setForecast(list)
       setDetails(main)
+      Analytics.trackEvent('Weather requested', { City: name })
     }
 
     if (latitude && longitude) {
