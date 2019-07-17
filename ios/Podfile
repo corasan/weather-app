@@ -30,6 +30,7 @@ target 'WeatherApp' do
   pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes/ios'
 
   pod 'Firebase/Core'
+  pod 'Firebase/AdMob', '~> 6.3.0'
 
   target 'WeatherAppTests' do
     inherit! :search_paths
