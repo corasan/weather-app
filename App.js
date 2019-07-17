@@ -21,7 +21,7 @@ function App() {
   const [forecast, setForecast] = useState([])
   const [isFahrenheit, setIsFahrenheit] = useState(true)
   const [temp, setTemp] = useState(0)
-  const [details, setDetails] = useState({})
+  const [details, setDetails] = useState(null)
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -44,6 +44,7 @@ function App() {
     if (!permission) {
       requestPermission()
     } else {
+      console.log(permission)
       setCurrentLocation()
     }
   }, [permission])
@@ -91,6 +92,7 @@ function App() {
     details,
   }
 
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {permission && (longitude && latitude) ? (
@@ -98,13 +100,18 @@ function App() {
           <View style={styles.container}>
             <WeatherLocation city={city} />
             <CurrentTemp weather={weather} />
-            <WeatherDetails />
+            {details && <WeatherDetails details={details} />}
 
             <Forecast data={forecast} />
           </View>
         </Context.Provider>
-      ) : <NoLocation />
-      }
+      ) : (
+        <NoLocation
+          permission={permission}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      )}
     </SafeAreaView>
   )
 }

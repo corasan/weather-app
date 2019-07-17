@@ -1,3 +1,4 @@
+// @flow
 import React, { useContext } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import Text from '@components/Text'
@@ -17,7 +18,7 @@ function CurrentTemp({ weather }: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
         <View style={styles.center}>
           <Image source={{ uri }} style={{ height: 95, width: 95 }} />
           <Text style={styles.description}>{main}</Text>
