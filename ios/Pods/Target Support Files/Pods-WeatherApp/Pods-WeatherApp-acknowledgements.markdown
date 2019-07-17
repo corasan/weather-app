@@ -700,10 +700,6 @@ Copyright 2019 Google
    END OF TERMS AND CONDITIONS
 
 
-## Google-Mobile-Ads-SDK
-
-Copyright 2019 Google
-
 ## GoogleAppMeasurement
 
 Copyright 2019 Google
