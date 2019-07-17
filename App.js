@@ -1,28 +1,36 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @flow
- */
-
-import React, { Component, useState, useEffect } from 'react'
-import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentTemp from '@components/Weather/CurrentTemp'
-import WeatherLocation from '@components/Weather/WeatherLocation'
-import codePush from 'react-native-code-push';
-import { getWeatherByLocation } from './src/api'
+import CurrentTemp from '@components/CurrentWeather/CurrentTemp'
+import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
+import Forecast from '@components/Forecast'
+import NoLocation from '@components/NoLocation'
+import codePush from 'react-native-code-push'
+import WeatherDetails from '@components/WeatherDetails'
+import Analytics from 'appcenter-analytics'
+import firebase from 'react-native-firebase'
+
+import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
+import Context from './src/context'
+import { fahrenheitToCelsius } from './src/utils'
+import { AD_UNIT } from './src/constants'
+
+const { Banner } = firebase.admob
 
 function App() {
   const [permission, setPermission] = useState(false)
   const [longitude, setLongitude] = useState(0)
   const [latitude, setLatitude] = useState(0)
-  const [tempInfo, setTempInfo] = useState(null)
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState({})
+  const [forecast, setForecast] = useState([])
+  const [isFahrenheit, setIsFahrenheit] = useState(true)
+  const [temp, setTemp] = useState(0)
+  const [details, setDetails] = useState(null)
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
+    firebase.admob().initialize('ca-app-pub-6893917161539964~3285985267')
     checkPermission()
 
     return function cleanup() {
@@ -30,9 +38,11 @@ function App() {
     }
   }, [])
 
-  const handlePermissionUpdate = (authorization) => {
+  const handlePermissionUpdate = (authorization: string) => {
     if (authorization === 'authorizedWhenInUse') {
       setPermission(true)
+    } else {
+      setPermission(false)
     }
   }
 
@@ -40,7 +50,8 @@ function App() {
     if (!permission) {
       requestPermission()
     } else {
-      getWeather()
+      console.log(permission)
+      setCurrentLocation()
     }
   }, [permission])
 
@@ -54,21 +65,62 @@ function App() {
     setPermission(result)
   }
 
-  const getWeather = async () => {
-    const { longitude, latitude } = await RNLocation.getLatestLocation({ timeout: 60000 })
-    const { main, name, weather, wind, sys } = await getWeatherByLocation(latitude, longitude)
-    setTempInfo(main)
-    setCity(name)
-    setWeather(weather[0])
+  const setCurrentLocation = async () => {
+    const { longitude: long, latitude: lat } = await RNLocation.getLatestLocation({ timeout: 60000 })
+    setLatitude(lat)
+    setLongitude(long)
   }
-  
+
+  useEffect(() => {
+    const getWeather = async () => {
+      const { main, name, weather: weath } = await getWeatherByLocation(latitude, longitude)
+      const { list } = await getDailyForecastByLocation(latitude, longitude)
+      setTemp(main?.temp)
+      setCity(name)
+      setWeather(weath[0])
+      setForecast(list)
+      setDetails(main)
+      Analytics.trackEvent('Weather requested', { City: name })
+    }
+
+    if (latitude && longitude) {
+      getWeather()
+    }
+  }, [latitude, longitude])
+
+  const toggleUnit = () => {
+    setIsFahrenheit(!isFahrenheit)
+  }
+
+  const context = {
+    toggleUnit,
+    temp: isFahrenheit ? temp : fahrenheitToCelsius(temp),
+    isFahrenheit,
+    details,
+  }
+
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <WeatherLocation city={city} />
-        {/* $FlowFixMe */}
-        <CurrentTemp temp={tempInfo?.temp.toFixed(0)} weather={weather} />
-      </View>
+      {permission && (longitude && latitude) ? (
+        <Context.Provider value={context}>
+          <View style={styles.container}>
+            <WeatherLocation city={city} />
+            <CurrentTemp weather={weather} />
+            {details && <WeatherDetails details={details} />}
+
+            <Forecast data={forecast} />
+          </View>
+        </Context.Provider>
+      ) : (
+        <NoLocation
+          permission={permission}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      )}
+
+      <Banner unitId={AD_UNIT} />
     </SafeAreaView>
   )
 }
