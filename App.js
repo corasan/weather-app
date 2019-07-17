@@ -8,10 +8,14 @@ import NoLocation from '@components/NoLocation'
 import codePush from 'react-native-code-push'
 import WeatherDetails from '@components/WeatherDetails'
 import Analytics from 'appcenter-analytics'
+import firebase from 'react-native-firebase'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
 import { fahrenheitToCelsius } from './src/utils'
+import { AD_UNIT } from './src/constants'
+
+const { Banner } = firebase.admob
 
 function App() {
   const [permission, setPermission] = useState(false)
@@ -26,6 +30,7 @@ function App() {
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
+    firebase.admob().initialize('ca-app-pub-6893917161539964~3285985267')
     checkPermission()
 
     return function cleanup() {
@@ -114,6 +119,8 @@ function App() {
           longitude={longitude}
         />
       )}
+
+      <Banner unitId={AD_UNIT} />
     </SafeAreaView>
   )
 }
