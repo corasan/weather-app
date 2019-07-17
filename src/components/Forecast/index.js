@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import moment from 'moment'
 import { map, filter, groupBy, flatMap } from 'lodash'
-import { ForecastType } from '../../weatherTypes'
+import { ForecastType } from '@types/weatherTypes'
 import ForecastItem from './ForecastItem'
 
 type Props = { data: [] }

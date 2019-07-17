@@ -23,6 +23,8 @@ node_modules/warning/.*
 ; Flow doesn't support platforms
 .*/Libraries/Utilities/HMRLoadingView.js
 
+node_modules/Libraries/react-native
+
 [untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
 

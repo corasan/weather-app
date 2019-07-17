@@ -3,7 +3,7 @@ import { View, Image } from 'react-native'
 import Text from '../Text'
 import Context from '../../context'
 import { fahrenheitToCelsius, formatDate } from '../../utils'
-import { ForecastType } from '../../weatherTypes'
+import { ForecastType } from '@types/weatherTypes'
 
 
 function ForecastItem({ main, dt_txt, weather }: ForecastType): React$Element<any> {

@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-import Text from '../Text'
+import Text from '@components/Text'
 import UnitButton from './UnitButton'
 import Context from '../../context'
 
@@ -18,13 +18,13 @@ function CurrentTemp({ weather }: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
         <View style={styles.center}>
           <Image source={{ uri }} style={{ height: 95, width: 95 }} />
           <Text style={styles.description}>{main}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.temp}>{temp.toFixed(0)}</Text>
+          <Text style={styles.temp}>{temp ? temp.toFixed(0) : 0}</Text>
           <View style={styles.btnContainers}>
             <UnitButton
               toggleUnit={toggleUnit}
