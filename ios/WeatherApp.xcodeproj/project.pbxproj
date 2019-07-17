@@ -21,6 +21,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* WeatherAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeatherAppTests.m */; };
 		5116E2A65891BCD6FD93149E /* libPods-WeatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D89958E18EB3E9F97F4A4FF /* libPods-WeatherAppTests.a */; };
 		6C7335A82412594DD7449D7A /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4202829BB051B7A5217833C5 /* libPods-WeatherApp.a */; };
+		CAC7082D22DEC980003B3E2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAC7082C22DEC980003B3E2E /* GoogleService-Info.plist */; };
 		DAAD806578530D1D2CA42C5B /* Pods_WeatherApp_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1978BD241980A84B6B63AA77 /* Pods_WeatherApp_tvOS.framework */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
@@ -72,6 +73,7 @@
 		9A589E1F8146632064605C5B /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B795F2E14DF72959E8050BC7 /* Pods-WeatherAppTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.staging.xcconfig"; path = "Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.staging.xcconfig"; sourceTree = "<group>"; };
 		C13BB1CDE8556F336C4C03AD /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		CAC7082C22DEC980003B3E2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CAE7DFC222C6FD6300538690 /* WeatherApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		CDCEB598681B9CCA7788CDD9 /* Pods-WeatherApp.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.staging.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.staging.xcconfig"; sourceTree = "<group>"; };
 		DAC4F71FE53313C4C9A8A905 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		13B07FAE1A68108700A75B9A /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				CAC7082C22DEC980003B3E2E /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -367,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CAC7082D22DEC980003B3E2E /* GoogleService-Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1305464E2E1C48A79A9D7661 /* AppCenter-Config.plist in Resources */,
 			);

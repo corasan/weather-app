@@ -14,7 +14,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-@import GoogleMobileAds;
+@import Firebase;
 
 @implementation AppDelegate
 
@@ -35,7 +35,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+  [FIRApp configure];
   return YES;
 }
 

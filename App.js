@@ -8,6 +8,7 @@ import NoLocation from '@components/NoLocation'
 import codePush from 'react-native-code-push'
 import WeatherDetails from '@components/WeatherDetails'
 import Analytics from 'appcenter-analytics'
+import { AdMobBanner } from 'react-native-admob'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
@@ -114,6 +115,12 @@ function App() {
           longitude={longitude}
         />
       )}
+      <AdMobBanner
+        adSize="fullBanner"
+        adUnitID="ca-app-pub-3940256099942544/2934735716"
+        testDevices={[AdMobBanner.simulatorId]}
+        onAdFailedToLoad={error => console.error(error)}
+      />
     </SafeAreaView>
   )
 }
