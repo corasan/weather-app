@@ -36,7 +36,7 @@ function WeatherDetails({ details }: { details: DetailsType }) {
       </View>
       <View style={styles.row}>
         <DetailItem value={`${humidity}%`} label="Humidity" />
-        <DetailItem value={`${pressure} hpa`} label="Pressure" />
+        <DetailItem value={`${pressure} HPA`} label="Pressure" />
       </View>
     </View>
   )

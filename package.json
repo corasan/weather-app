@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint .",
     "cp-staging": "appcenter codepush release-react -a corasan/WeatherApp -s Staging",
-    "cp-production": "appcenter codepush release-react -a corasan/WeatherApp -d Production"
+    "cp-prod": "appcenter codepush release-react -a corasan/WeatherApp -d Production"
   },
   "dependencies": {
     "appcenter": "^2.1.0",

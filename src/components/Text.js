@@ -4,8 +4,9 @@ import { Text as RNText, StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Futura',
-    fontSize: 18
-  }
+    fontSize: 18,
+    letterSpacing: 0.5,
+  },
 })
 
 const Text = (props) => {
