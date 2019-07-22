@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, SafeAreaView } from 'react-native'
 import RNLocation from 'react-native-location'
-import CurrentTemp from '@components/CurrentWeather/CurrentTemp'
-import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
-import Forecast from '@components/Forecast'
-import NoLocation from '@components/NoLocation'
 import codePush from 'react-native-code-push'
-import WeatherDetails from '@components/WeatherDetails'
 import Analytics from 'appcenter-analytics'
 import firebase from 'react-native-firebase'
+import Navigation from './src/navigation'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
 import { fahrenheitToCelsius } from './src/utils'
-import { AD_UNIT } from './src/constants'
-
-const { Banner } = firebase.admob
 
 function App() {
   const [permission, setPermission] = useState(false)
@@ -27,6 +19,7 @@ function App() {
   const [isFahrenheit, setIsFahrenheit] = useState(true)
   const [temp, setTemp] = useState(0)
   const [details, setDetails] = useState(null)
+  const [todayMinMax, setTodayMinMax] = useState()
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
@@ -97,52 +90,21 @@ function App() {
     temp: isFahrenheit ? temp : fahrenheitToCelsius(temp),
     isFahrenheit,
     details,
+    setTodayMinMax,
+    todayMinMax,
+    weather,
+    city,
+    forecast,
+    latitude,
+    longitude,
+    permission,
   }
 
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {permission && (longitude && latitude) ? (
-        <Context.Provider value={context}>
-          <View style={styles.container}>
-            <WeatherLocation city={city} />
-            <CurrentTemp weather={weather} />
-            {details && <WeatherDetails details={details} />}
-
-            <Forecast data={forecast} />
-          </View>
-        </Context.Provider>
-      ) : (
-        <NoLocation
-          permission={permission}
-          latitude={latitude}
-          longitude={longitude}
-        />
-      )}
-
-      <Banner unitId={AD_UNIT} />
-    </SafeAreaView>
+    <Context.Provider value={context}>
+      <Navigation />
+    </Context.Provider>
   )
 }
 
 export default codePush(App)
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingTop: 20,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-})
