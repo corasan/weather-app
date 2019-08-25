@@ -5,12 +5,12 @@ import WeatherLocation from '@components/CurrentWeather/WeatherLocation'
 import Forecast from '@components/Forecast'
 import NoLocation from '@components/NoLocation'
 import WeatherDetails from '@components/WeatherDetails'
-import firebase from 'react-native-firebase'
+import admob from '@react-native-firebase/admob'
 
 import Context from '../context'
 import { AD_UNIT } from '../constants'
 
-const { Banner } = firebase.admob
+const { MobileAd } = admob
 
 function Main() {
   const {
@@ -41,7 +41,7 @@ function Main() {
         />
       )}
 
-      <Banner unitId={AD_UNIT} />
+      <MobileAd adUnitId={AD_UNIT} />
     </SafeAreaView>
   )
 }

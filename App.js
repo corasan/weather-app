@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import RNLocation from 'react-native-location'
 import codePush from 'react-native-code-push'
 import Analytics from 'appcenter-analytics'
-import firebase from 'react-native-firebase'
+import admob from '@react-native-firebase/admob'
 import Navigation from './src/navigation'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     const permissionUpdate = RNLocation.subscribeToPermissionUpdates(handlePermissionUpdate)
-    firebase.admob().initialize('ca-app-pub-6893917161539964~3285985267')
+    admob()
     checkPermission()
 
     return function cleanup() {

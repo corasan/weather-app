@@ -1,6 +1,6 @@
 {
   "name": "react-native-location",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "summary": "Native GPS location support for React Native",
   "description": "Native GPS location support for React Native",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "homepage": "https://github.com/timfpark/react-native-location",
   "source": {
     "git": "https://github.com/timfpark/react-native-location.git",
-    "tag": "2.3.0"
+    "tag": "2.5.0"
   },
   "frameworks": "CoreLocation",
   "source_files": "ios/**/*.{h,m}",
