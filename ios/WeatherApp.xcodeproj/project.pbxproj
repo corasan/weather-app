@@ -22,6 +22,7 @@
 		70492118B4897ECA949E3A7A /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1695022689758283D618B /* libPods-WeatherApp.a */; };
 		99A21A3DE76DF42445C6C4EA /* Pods_WeatherApp_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF59CA185B69A549C54114EB /* Pods_WeatherApp_tvOSTests.framework */; };
 		AE59D64688BCE9553B78AD1C /* libPods-WeatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B959753D1EB9E94FAE9E013B /* libPods-WeatherAppTests.a */; };
+		CA3D6547232D971B006D6116 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA3D6546232D971B006D6116 /* Default-568h@2x.png */; };
 		CA56EEE9232D9119006C36B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		CA56EEEA232D9119006C36B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		CA56EEEC232D9119006C36B0 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -83,6 +84,7 @@
 		9D68C90640E96EC0866E08CF /* Pods-WeatherApp.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.staging.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.staging.xcconfig"; sourceTree = "<group>"; };
 		B959753D1EB9E94FAE9E013B /* libPods-WeatherAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF59CA185B69A549C54114EB /* Pods_WeatherApp_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA3D6546232D971B006D6116 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CA56EEF8232D9119006C36B0 /* WeatherApp-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeatherApp-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA56EEF9232D911B006C36B0 /* WeatherApp-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WeatherApp-Dev.plist"; path = "/Users/corasan.dev/Projects/weather-app/ios/WeatherApp-Dev.plist"; sourceTree = "<absolute>"; };
 		CAC7082C22DEC980003B3E2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CA3D6546232D971B006D6116 /* Default-568h@2x.png */,
 				13B07FAE1A68108700A75B9A /* WeatherApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* WeatherAppTests */,
@@ -445,6 +448,7 @@
 				CA56EEFC232D9199006C36B0 /* GoogleService-Info.plist in Resources */,
 				CA56EEF1232D9119006C36B0 /* LaunchScreen.xib in Resources */,
 				CA56EEF2232D9119006C36B0 /* AppCenter-Config.plist in Resources */,
+				CA3D6547232D971B006D6116 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,7 +1158,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "WeatherApp copy-Info.plist";
+				INFOPLIST_FILE = "WeatherApp-Dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1180,7 +1184,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "WeatherApp copy-Info.plist";
+				INFOPLIST_FILE = "WeatherApp-Dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1205,7 +1209,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "WeatherApp copy-Info.plist";
+				INFOPLIST_FILE = "WeatherApp-Dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
