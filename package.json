@@ -1,5 +1,5 @@
 {
-  "name": "WeatherApp",
+  "name": "cloudmate",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "react-native-code-push": "^5.7.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-location": "^2.5.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.5",
     "react-navigation-stack": "^1.7.3"
   },

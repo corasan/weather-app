@@ -22,6 +22,14 @@
 		70492118B4897ECA949E3A7A /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1695022689758283D618B /* libPods-WeatherApp.a */; };
 		99A21A3DE76DF42445C6C4EA /* Pods_WeatherApp_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF59CA185B69A549C54114EB /* Pods_WeatherApp_tvOSTests.framework */; };
 		AE59D64688BCE9553B78AD1C /* libPods-WeatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B959753D1EB9E94FAE9E013B /* libPods-WeatherAppTests.a */; };
+		CA0415CF232D9DC100785BB5 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CB232D9DC100785BB5 /* Feather.ttf */; };
+		CA0415D0232D9DC100785BB5 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CB232D9DC100785BB5 /* Feather.ttf */; };
+		CA0415D1232D9DC100785BB5 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CC232D9DC100785BB5 /* AntDesign.ttf */; };
+		CA0415D2232D9DC100785BB5 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CC232D9DC100785BB5 /* AntDesign.ttf */; };
+		CA0415D3232D9DC100785BB5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CD232D9DC100785BB5 /* FontAwesome.ttf */; };
+		CA0415D4232D9DC100785BB5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CD232D9DC100785BB5 /* FontAwesome.ttf */; };
+		CA0415D5232D9DC100785BB5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CE232D9DC100785BB5 /* EvilIcons.ttf */; };
+		CA0415D6232D9DC100785BB5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0415CE232D9DC100785BB5 /* EvilIcons.ttf */; };
 		CA3D6547232D971B006D6116 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA3D6546232D971B006D6116 /* Default-568h@2x.png */; };
 		CA56EEE9232D9119006C36B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		CA56EEEA232D9119006C36B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -84,6 +92,10 @@
 		9D68C90640E96EC0866E08CF /* Pods-WeatherApp.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.staging.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.staging.xcconfig"; sourceTree = "<group>"; };
 		B959753D1EB9E94FAE9E013B /* libPods-WeatherAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF59CA185B69A549C54114EB /* Pods_WeatherApp_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0415CB232D9DC100785BB5 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		CA0415CC232D9DC100785BB5 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		CA0415CD232D9DC100785BB5 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		CA0415CE232D9DC100785BB5 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		CA3D6546232D971B006D6116 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CA56EEF8232D9119006C36B0 /* WeatherApp-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeatherApp-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA56EEF9232D911B006C36B0 /* WeatherApp-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WeatherApp-Dev.plist"; path = "/Users/corasan.dev/Projects/weather-app/ios/WeatherApp-Dev.plist"; sourceTree = "<absolute>"; };
@@ -219,6 +231,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CA0415CA232D9D9A00785BB5 /* Fonts */,
 				CA3D6546232D971B006D6116 /* Default-568h@2x.png */,
 				13B07FAE1A68108700A75B9A /* WeatherApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -245,6 +258,17 @@
 				CA56EEF8232D9119006C36B0 /* WeatherApp-Dev.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CA0415CA232D9D9A00785BB5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CA0415CC232D9DC100785BB5 /* AntDesign.ttf */,
+				CA0415CE232D9DC100785BB5 /* EvilIcons.ttf */,
+				CA0415CB232D9DC100785BB5 /* Feather.ttf */,
+				CA0415CD232D9DC100785BB5 /* FontAwesome.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CAFD23CB22C2FED1003FE824 /* Recovered References */ = {
@@ -417,8 +441,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0415D1232D9DC100785BB5 /* AntDesign.ttf in Resources */,
+				CA0415D3232D9DC100785BB5 /* FontAwesome.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				CAC7082D22DEC980003B3E2E /* GoogleService-Info.plist in Resources */,
+				CA0415CF232D9DC100785BB5 /* Feather.ttf in Resources */,
+				CA0415D5232D9DC100785BB5 /* EvilIcons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1305464E2E1C48A79A9D7661 /* AppCenter-Config.plist in Resources */,
 			);
@@ -444,10 +472,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA56EEEF232D9119006C36B0 /* Images.xcassets in Resources */,
+				CA0415D0232D9DC100785BB5 /* Feather.ttf in Resources */,
 				CA56EEFA232D9144006C36B0 /* WeatherApp-Dev.plist in Resources */,
+				CA0415D6232D9DC100785BB5 /* EvilIcons.ttf in Resources */,
 				CA56EEFC232D9199006C36B0 /* GoogleService-Info.plist in Resources */,
 				CA56EEF1232D9119006C36B0 /* LaunchScreen.xib in Resources */,
+				CA0415D4232D9DC100785BB5 /* FontAwesome.ttf in Resources */,
 				CA56EEF2232D9119006C36B0 /* AppCenter-Config.plist in Resources */,
+				CA0415D2232D9DC100785BB5 /* AntDesign.ttf in Resources */,
 				CA3D6547232D971B006D6116 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
