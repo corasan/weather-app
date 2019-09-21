@@ -11,7 +11,6 @@ type Props = { data: [] }
 function Forecast({ data }: Props): React$Element<any> {
   const [days, setDays] = useState([])
   const { setTodayMinMax } = useContext(Context)
-  console.log(data)
 
   const formatDate = (date: string) => moment(date).format('dddd')
 

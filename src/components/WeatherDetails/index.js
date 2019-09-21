@@ -22,7 +22,6 @@ type DetailsType = {
 function WeatherDetails({ details }: { details: DetailsType }) {
   const { isFahrenheit, todayMinMax } = useContext(Context)
   const { humidity, pressure, temp_min: min } = details
-  console.log(todayMinMax)
   const { temp_max: max } = todayMinMax.main
   const maxTemp = isFahrenheit ? max : fahrenheitToCelsius(max)
   const minTemp = isFahrenheit ? min : fahrenheitToCelsius(min)

@@ -6,10 +6,10 @@ import Forecast from '@components/Forecast'
 import NoLocation from '@components/NoLocation'
 import WeatherDetails from '@components/WeatherDetails'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-// import { BannerAd } from '@react-native-firebase/admob'
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob'
 
 import { useAppContext, useNavigation } from '@hooks'
-// import { AD_UNIT } from '../constants'
+import { AD_UNIT } from '../constants'
 
 // const { MobileAd } = admob
 
@@ -24,13 +24,14 @@ function Main() {
     forecast,
   } = useAppContext()
   const { navigate } = useNavigation()
+  const unitId = __DEV__ ? TestIds.BANNER : AD_UNIT
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {permission && (longitude && latitude) ? (
         <View style={styles.container}>
           <TouchableOpacity style={styles.settingsBtn} activeOpacity={0.5} onPress={() => navigate('Settings')}>
-            <AntDesign name="setting" size={25} color="#b8b8b8" />
+            <AntDesign name="plus" size={25} color="#b8b8b8" />
           </TouchableOpacity>
           <WeatherLocation city={city} />
           <CurrentTemp weather={weather} />
@@ -47,6 +48,19 @@ function Main() {
       )}
 
       {/* <MobileAd adUnitId={AD_UNIT} /> */}
+      <BannerAd
+        unitId={unitId}
+        size={BannerAdSize.FULL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+        onAdLoaded={() => {
+          console.log('Advert loaded');
+        }}
+        onAdFailedToLoad={error => {
+          console.error('Advert failed to load: ', error);
+        }}
+      />
     </SafeAreaView>
   )
 }

@@ -43,7 +43,6 @@ function App() {
     if (!permission) {
       requestPermission()
     } else {
-      console.log(permission)
       setCurrentLocation()
     }
   }, [permission])

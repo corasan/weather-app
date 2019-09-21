@@ -1,10 +1,10 @@
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import Main from '@views/Main'
-import Settings from '@views/Settings'
+import AddCity from '@views/AddCity'
 
 const navigation = createStackNavigator({
-  Main, Settings,
+  Main, AddCity,
 }, {
   defaultNavigationOptions: {
     header: null,
