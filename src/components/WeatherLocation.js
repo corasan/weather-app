@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 // import { NativeModules, NativeEventEmitter } from 'react-native'
-import Text from '../Text'
+import Text from './Text'
 
 // const { RNClock } = NativeModules
 // const ClockEvents = new NativeEventEmitter(RNClock)
