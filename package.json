@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "start": "say -v 'Samantha' 'starting server' && react-native start",
     "test": "jest",
     "lint": "eslint .",
@@ -18,8 +20,8 @@
     "appcenter-crashes": "^2.3.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "react": "^16.9.0",
-    "react-native": "^0.60.5",
+    "react": "16.9.0",
+    "react-native": "0.61.0",
     "react-native-code-push": "^5.7.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-location": "^2.5.0",
@@ -28,8 +30,8 @@
     "react-navigation-stack": "^1.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/runtime": "^7.6.0",
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
