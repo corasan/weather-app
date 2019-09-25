@@ -26,17 +26,24 @@ export default function Current() {
 	const [addCityVisible, setAddCityVisible] = useState(false)
 	const unitId = __DEV__ ? TestIds.BANNER : AD_UNIT
 
+	const renderTopBar = () => (
+		<View style={styles.topBar}>
+			<View />
+			<TouchableOpacity
+				style={styles.settingsBtn}
+				activeOpacity={0.5}
+				onPress={() => setAddCityVisible(true)}
+			>
+				<AntDesign name="plus" size={25} color="#b8b8b8" />
+			</TouchableOpacity>
+		</View>
+	)
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			{permission && (longitude && latitude) ? (
 				<View style={styles.container}>
-					<TouchableOpacity
-						style={styles.settingsBtn}
-						activeOpacity={0.5}
-						onPress={() => setAddCityVisible(true)}
-					>
-						<AntDesign name="plus" size={25} color="#b8b8b8" />
-					</TouchableOpacity>
+					{renderTopBar()}
 					<WeatherLocation city={city} />
 					<CurrentTemp weather={weather} />
 					{details && <WeatherDetails details={details} />}
@@ -51,7 +58,10 @@ export default function Current() {
 				/>
 			)}
 
-			<AddCity close={() => setAddCityVisible(false)} visible={addCityVisible} />
+			<AddCity
+				close={() => setAddCityVisible(false)}
+				visible={addCityVisible}
+			/>
 
 			<BannerAd
 				unitId={unitId}
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		alignItems: 'center',
 		paddingHorizontal: '6%',
-		paddingTop: 20,
+		paddingTop: 5,
 	},
 	welcome: {
 		fontSize: 20,
@@ -89,9 +99,11 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 	},
 	settingsBtn: {
-		position: 'absolute',
-		top: 0,
-		right: 10,
-		padding: 6,
+		padding: 3,
+	},
+	topBar: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 	},
 })

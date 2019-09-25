@@ -41,7 +41,12 @@ function AddCity({ visible = true, close }: Props) {
 				<ScrollView scrollEnabled={false}>
 					<View style={{ flex: 1, paddingHorizontal: '6%', height: '100%' }}>
 						<View style={{ alignItems: 'flex-end' }}>
-							<ButtonClose onPress={close} />
+							<ButtonClose
+								onPress={() => {
+									setSearch('')
+									close()
+								}}
+							/>
 						</View>
 						<Text style={styles.title}>Add a city</Text>
 						<View style={styles.inputContainer}>
