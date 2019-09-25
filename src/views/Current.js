@@ -51,7 +51,7 @@ export default function Current() {
 				/>
 			)}
 
-			<AddCity visible={addCityVisible} />
+			<AddCity close={() => setAddCityVisible(false)} visible={addCityVisible} />
 
 			<BannerAd
 				unitId={unitId}

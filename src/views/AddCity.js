@@ -8,7 +8,7 @@ import {
 	StyleSheet,
 	ScrollView,
 } from 'react-native'
-import { Text } from '@components'
+import { Text, ButtonClose } from '@components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import useDebounce from '@hooks/useDebounce'
@@ -16,34 +16,33 @@ import { getWeatherByCity } from '../api'
 
 type Props = {
 	visible: boolean,
+	close(): void,
 }
 
-function AddCity({ visible = false }: Props) {
+function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
-	const [isSearching, setIsSearching] = useState(false)
 	const [main, setMain] = useState({})
-  // const [called, setCalled] = useState(0)
-  const debouncedSearch = useDebounce(search, 700)
-	// const [locationService, setLocationService] = useState()
+	const debouncedSearch = useDebounce(search, 700)
 
-	console.log('debounce__', debouncedSearch);
 	useEffect(() => {
 		async function getCity() {
 			const { main: mainObj } = await getWeatherByCity(debouncedSearch)
 			setMain(mainObj)
-    }
-
+		}
 
 		if (debouncedSearch) {
-      getCity()
-    }
+			getCity()
+		}
 	}, [debouncedSearch, search])
 
 	return (
 		<Modal visible={visible} animationType="slide">
-			<ScrollView>
-				<SafeAreaView style={{ flex: 1 }}>
-					<View style={{ paddingHorizontal: '6%', paddingTop: '10%', flex: 1 }}>
+			<SafeAreaView style={{ flex: 1 }}>
+				<ScrollView scrollEnabled={false}>
+					<View style={{ flex: 1, paddingHorizontal: '6%', height: '100%' }}>
+						<View style={{ alignItems: 'flex-end' }}>
+							<ButtonClose onPress={close} />
+						</View>
 						<Text style={styles.title}>Add a city</Text>
 						<View style={styles.inputContainer}>
 							<TextInput
@@ -56,13 +55,13 @@ function AddCity({ visible = false }: Props) {
 							<TouchableOpacity>
 								<AntDesign name="search1" size={25} style={styles.search} />
 							</TouchableOpacity>
-
 						</View>
-
-						<Text>{main?.temp}</Text>
+						<View>
+							<Text>{main?.temp}</Text>
+						</View>
 					</View>
-				</SafeAreaView>
-			</ScrollView>
+				</ScrollView>
+			</SafeAreaView>
 		</Modal>
 	)
 }
@@ -86,6 +85,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		flex: 1,
+		paddingVertical: 8,
 	},
 })
