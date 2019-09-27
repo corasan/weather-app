@@ -23,7 +23,7 @@ export async function getDailyForecastByLocation(lat: number, long: number) {
   return resObj
 }
 
-export async function getWeatherByCity(city: string, country: string) {
+export async function getWeatherByCity(city: string, country?: string) {
   const res = await get(`q=${city}${country ? `,${country}` : ''}`)
   const resObj = await res.json()
   return resObj
