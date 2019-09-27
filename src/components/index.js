@@ -6,6 +6,7 @@ import WeatherDetails from './WeatherDetails'
 import WeatherLocation from './WeatherLocation'
 import CurrentTemp from './CurrentTemp'
 import ButtonClose from './ButtonClose'
+import WeatherIcon from './WeatherIcon'
 
 module.exports = {
   UnitButton,
@@ -16,4 +17,5 @@ module.exports = {
   WeatherLocation,
   CurrentTemp,
   ButtonClose,
+  WeatherIcon,
 }
