@@ -8,11 +8,13 @@ import {
 	StyleSheet,
 	ScrollView,
 } from 'react-native'
-import { Text, ButtonClose } from '@components'
+import { Text, ButtonClose } from 'components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import useDebounce from '@hooks/useDebounce'
+import { useDebounce } from 'hooks'
 import { getWeatherByCity } from '../api'
+import { WeatherIcon } from 'components'
+import { useAppContext } from 'hooks'
 
 type Props = {
 	visible: boolean,
@@ -21,19 +23,31 @@ type Props = {
 
 function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
-	const [main, setMain] = useState({})
+	const [result: {}, setResult] = useState(null)
+	const [temp, setTemp] = useState(0)
 	const debouncedSearch = useDebounce(search, 700)
+	const { isFahrenheit } = useAppContext()
 
 	useEffect(() => {
 		async function getCity() {
-			const { main: mainObj } = await getWeatherByCity(debouncedSearch)
-			setMain(mainObj)
+			const res = await getWeatherByCity(debouncedSearch)
+			console.log(res)
+			setResult(res)
+			setTemp(res?.main?.temp)
 		}
 
 		if (debouncedSearch) {
 			getCity()
 		}
-	}, [debouncedSearch, search])
+
+		return () => setResult(null)
+	}, [debouncedSearch])
+
+	function onClose() {
+		setSearch('')
+		setResult(null)
+		close()
+	}
 
 	return (
 		<Modal visible={visible} animationType="slide">
@@ -41,12 +55,7 @@ function AddCity({ visible = true, close }: Props) {
 				<ScrollView scrollEnabled={false}>
 					<View style={{ flex: 1, paddingHorizontal: '6%', height: '100%' }}>
 						<View style={{ alignItems: 'flex-end' }}>
-							<ButtonClose
-								onPress={() => {
-									setSearch('')
-									close()
-								}}
-							/>
+							<ButtonClose onPress={onClose} />
 						</View>
 						<Text style={styles.title}>Add a city</Text>
 						<View style={styles.inputContainer}>
@@ -58,12 +67,22 @@ function AddCity({ visible = true, close }: Props) {
 								onChangeText={setSearch}
 							/>
 							<TouchableOpacity>
-								<AntDesign name="search1" size={25} style={styles.search} />
+								<AntDesign name="search1" size={25} />
 							</TouchableOpacity>
 						</View>
-						<View>
-							<Text>{main?.temp}</Text>
-						</View>
+
+						{result && (
+							<View style={styles.result}>
+								<WeatherIcon
+									name={result?.weather[0].icon}
+									description={result?.weather[0].description}
+								/>
+								<View style={{ flexDirection: 'row' }}>
+									<Text>{temp.toFixed(0)}</Text>
+									<Text style={styles.tempUnit}> º{isFahrenheit ? 'F' : 'C'}</Text>
+								</View>
+							</View>
+						)}
 					</View>
 				</ScrollView>
 			</SafeAreaView>
@@ -91,5 +110,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingVertical: 8,
+	},
+	result: {
+		borderWidth: 1,
+		paddingVertical: 10,
+		paddingHorizontal: 12,
+		flexDirection: 'row',
+	},
+	tempUnit: {
+		fontSize: 14,
 	},
 })
