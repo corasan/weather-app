@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { BannerAd, TestIds, BannerAdSize } from '@react-native-firebase/admob'
 import AddCity from './AddCity'
-import { useAppContext, useNavigation } from '@hooks'
+import { useAppContext } from 'hooks'
 import { AD_UNIT } from '../constants'
 import {
 	CurrentTemp,
@@ -11,7 +11,7 @@ import {
 	NoLocation,
 	WeatherLocation,
 	WeatherDetails,
-} from '@components'
+} from 'components'
 
 export default function Current() {
 	const {

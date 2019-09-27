@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'
-import Text from '@components/Text'
+import Text from 'components/Text'
 import Context from '../context'
 import { fahrenheitToCelsius } from '../utils'
 

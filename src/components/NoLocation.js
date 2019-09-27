@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-import Text from '@components/Text'
-import assets from '@assets'
+import Text from 'components/Text'
+import assets from 'assets'
 
 type Props = {
   permission: boolean,
