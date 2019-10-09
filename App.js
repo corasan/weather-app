@@ -7,7 +7,6 @@ import Navigation from './src/navigation'
 
 import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
 import Context from './src/context'
-import { fahrenheitToCelsius } from './src/utils'
 
 function App() {
 	const [permission, setPermission] = useState(false)
@@ -94,7 +93,7 @@ function App() {
 
 	const context = {
 		toggleUnit,
-		temp: isFahrenheit ? temp : fahrenheitToCelsius(temp),
+		temp,
 		isFahrenheit,
 		details,
 		setTodayMinMax,

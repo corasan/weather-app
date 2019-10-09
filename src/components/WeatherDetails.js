@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'
 import Text from 'components/Text'
 import Context from '../context'
-import { fahrenheitToCelsius } from '../utils'
+import { fahrenheitToCelsius } from 'utils'
 
 const DetailItem = ({ value, label }: { value: number | string, label: string }) => (
   <View style={styles.thing}>

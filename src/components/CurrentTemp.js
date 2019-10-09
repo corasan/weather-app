@@ -1,20 +1,23 @@
 // @flow
 import React, { useContext } from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import Text from 'components/Text'
 import UnitButton from './UnitButton'
 import Context from '../context'
 import WeatherIcon from './WeatherIcon'
+import { fahrenheitToCelsius } from 'utils'
 
 type Weather = any
 
 type Props = {
 	weather: Weather,
+	temp: number,
 }
 
-function CurrentTemp({ weather }: Props): React$Element<React$ElementType> {
+function CurrentTemp({ weather, temp }: Props): React$Element<React$ElementType> {
 	const { icon, main } = weather
-	const { temp, toggleUnit, isFahrenheit } = useContext(Context)
+	const { toggleUnit, isFahrenheit } = useContext(Context)
+	const currentTemp = isFahrenheit ? temp : fahrenheitToCelsius(temp)
 
 	return (
 		<View style={styles.container}>
@@ -27,7 +30,7 @@ function CurrentTemp({ weather }: Props): React$Element<React$ElementType> {
 			>
 				<WeatherIcon name={icon} description={main} />
 				<View style={{ flexDirection: 'row' }}>
-					<Text style={styles.temp}>{temp ? temp.toFixed(0) : 0}</Text>
+					<Text style={styles.temp}>{currentTemp ? currentTemp.toFixed(0) : 0}</Text>
 					<View style={styles.btnContainers}>
 						<UnitButton
 							toggleUnit={toggleUnit}

@@ -22,6 +22,7 @@ export default function Current() {
 		weather,
 		details,
 		forecast,
+		temp,
 	} = useAppContext()
 	const [addCityVisible, setAddCityVisible] = useState(false)
 	const unitId = __DEV__ ? TestIds.BANNER : AD_UNIT
@@ -45,7 +46,7 @@ export default function Current() {
 				<View style={styles.container}>
 					{renderTopBar()}
 					<WeatherLocation city={city} />
-					<CurrentTemp weather={weather} />
+					<CurrentTemp weather={weather} temp={temp} />
 					{details && <WeatherDetails details={details} />}
 
 					<Forecast data={forecast} />
