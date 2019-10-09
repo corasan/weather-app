@@ -70,9 +70,6 @@ export default function Current() {
 				requestOptions={{
 					requestNonPersonalizedAdsOnly: true,
 				}}
-				onAdLoaded={() => {
-					console.log('Advert loaded')
-				}}
 				onAdFailedToLoad={error => {
 					console.error('Advert failed to load: ', error)
 				}}

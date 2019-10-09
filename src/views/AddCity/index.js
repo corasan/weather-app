@@ -56,8 +56,6 @@ export default function AddCity({ visible = true, close }: Props) {
 		fetchCitiesFromLocal()
 	}, [])
 
-	useEffect(() => console.log(savedCities), [savedCities])
-
 	async function saveCity() {
 		const cities = [result, ...savedCities]
 		await setItem(JSON.stringify(cities))
