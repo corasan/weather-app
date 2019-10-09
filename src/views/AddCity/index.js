@@ -14,8 +14,8 @@ import { Text, ButtonClose } from 'components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useDebounce } from 'hooks'
 import { WeatherIcon } from 'components'
-import { useFetchSavedCities } from 'hooks'
-import AsyncStorage from '@react-native-community/async-storage'
+import { useAsyncStorage } from '@react-native-community/async-storage'
+import { uniqBy } from 'lodash'
 import { getWeatherByCity } from '../../api'
 import ResultDetail from './ResultDetail'
 
@@ -24,34 +24,45 @@ type Props = {
 	close(): void,
 }
 
-async function saveCity(cities: Array<any>, city: {}) {
-	try {
-		const save = JSON.stringify([city, ...cities])
-		await AsyncStorage.setItem('CloudMate:SavedCities', save)
-	} catch (err) {
-		console.log(err);
-	}
-}
-
 export default function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
 	const [result, setResult] = useState(null)
+	const [savedCities, setSavedCities] = useState([])
 	const debouncedSearch = useDebounce(search, 700)
-	const cities = useFetchSavedCities()
+	const { setItem, getItem } = useAsyncStorage('@CloudMate:saved_cities')
 	const searchInput: TextInput.propTypes = useRef(null)
 
 	useEffect(() => {
-		async function getCity() {
+		async function getCityWeather() {
 			const res = await getWeatherByCity(debouncedSearch)
 			setResult(res)
 		}
 
 		if (debouncedSearch) {
-			getCity()
+			getCityWeather()
 		}
 
 		return () => setResult(null)
 	}, [debouncedSearch])
+
+	useEffect(() => {
+		async function fetchCitiesFromLocal() {
+			const cities = await getItem()
+			if (cities !== null) {
+				setSavedCities(uniqBy(JSON.parse(cities)))
+			}
+		}
+
+		fetchCitiesFromLocal()
+	}, [])
+
+	useEffect(() => console.log(savedCities), [savedCities])
+
+	async function saveCity() {
+		const cities = [result, ...savedCities]
+		await setItem(JSON.stringify(cities))
+		setSavedCities(uniqBy(cities, 'name'))
+	}
 
 	function onClose() {
 		setSearch('')
@@ -84,15 +95,15 @@ export default function AddCity({ visible = true, close }: Props) {
 							</View>
 						</TouchableWithoutFeedback>
 
-						{result && (
-							<TouchableOpacity style={styles.result} onPress={() => saveCity(cities, result)}>
+						{result?.weather && (
+							<TouchableOpacity style={styles.result} onPress={() => saveCity()}>
 								<Text style={{ fontSize: 22, marginBottom: 10 }}>{result?.name}</Text>
 								<View style={styles.resultRow}>
 									<WeatherIcon
-										name={result?.weather[0].icon}
-										description={result?.weather[0].description}
+										name={result?.weather[0]?.icon}
+										description={result?.weather[0]?.description}
 									/>
-									<ResultDetail label="Current" value={result.main?.temp} cities={cities} />
+									<ResultDetail label="Current" value={result?.main?.temp} />
 								</View>
 							</TouchableOpacity>
 						)}

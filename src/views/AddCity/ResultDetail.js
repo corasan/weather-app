@@ -8,10 +8,9 @@ type Props = {
   label: string,
   value?: number,
   isTemp?: boolean,
-  cities: [],
 }
 
-export default function ResultDetail({ value = 0, label, isTemp = true, cities }: Props): React$Element<React$ElementType> {
+export default function ResultDetail({ value = 0, label, isTemp = true }: Props): React$Element<React$ElementType> {
   const { isFahrenheit } = useAppContext()
 
   return (
