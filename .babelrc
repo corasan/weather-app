@@ -8,7 +8,8 @@
         "views": "./src/views",
         "components": "./src/components",
         "assets": "./src/assets",
-        "propTypes": "./src/types"
+        "propTypes": "./src/types",
+        "utils": "./src/utils"
       }
     }]
   ]

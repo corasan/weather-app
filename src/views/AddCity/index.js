@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
 	View,
 	SafeAreaView,
@@ -7,33 +7,34 @@ import {
 	TextInput,
 	StyleSheet,
 	ScrollView,
+	TouchableWithoutFeedback,
 } from 'react-native'
 import { Text, ButtonClose } from 'components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDebounce } from 'hooks'
-import { getWeatherByCity } from '../api'
+import { getWeatherByCity } from '../../api'
 import { WeatherIcon } from 'components'
-import { useAppContext } from 'hooks'
+import { useAppContext, useFetchSavedCities } from 'hooks'
+import ResultDetail from './ResultDetail'
 
 type Props = {
 	visible: boolean,
 	close(): void,
 }
 
-function AddCity({ visible = true, close }: Props) {
+export default function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
-	const [result: {}, setResult] = useState(null)
-	const [temp, setTemp] = useState(0)
+	const [result, setResult] = useState(null)
 	const debouncedSearch = useDebounce(search, 700)
 	const { isFahrenheit } = useAppContext()
+	const cities = useFetchSavedCities()
+	const searchInput: TextInput.propTypes = useRef(null)
 
 	useEffect(() => {
 		async function getCity() {
 			const res = await getWeatherByCity(debouncedSearch)
-			console.log(res)
 			setResult(res)
-			setTemp(res?.main?.temp)
 		}
 
 		if (debouncedSearch) {
@@ -48,7 +49,7 @@ function AddCity({ visible = true, close }: Props) {
 		setResult(null)
 		close()
 	}
-
+	// debugger
 	return (
 		<Modal visible={visible} animationType="slide">
 			<SafeAreaView style={{ flex: 1 }}>
@@ -58,28 +59,31 @@ function AddCity({ visible = true, close }: Props) {
 							<ButtonClose onPress={onClose} />
 						</View>
 						<Text style={styles.title}>Add a city</Text>
-						<View style={styles.inputContainer}>
-							<TextInput
-								style={styles.input}
-								placeholder="Search"
-								placeholderTextColor="#b8b8b8"
-								value={search}
-								onChangeText={setSearch}
-							/>
-							<TouchableOpacity>
-								<AntDesign name="search1" size={25} />
-							</TouchableOpacity>
-						</View>
+						<TouchableWithoutFeedback onPress={() => searchInput.current.focus()}>
+							<View style={styles.inputContainer}>
+								<TextInput
+									style={styles.input}
+									placeholder="Search"
+									placeholderTextColor="#b8b8b8"
+									value={search}
+									onChangeText={setSearch}
+									ref={searchInput}
+								/>
+								<TouchableOpacity>
+									<AntDesign name="search1" size={25} />
+								</TouchableOpacity>
+							</View>
+						</TouchableWithoutFeedback>
 
 						{result && (
 							<View style={styles.result}>
-								<WeatherIcon
-									name={result?.weather[0].icon}
-									description={result?.weather[0].description}
-								/>
-								<View style={{ flexDirection: 'row' }}>
-									<Text>{temp.toFixed(0)}</Text>
-									<Text style={styles.tempUnit}> º{isFahrenheit ? 'F' : 'C'}</Text>
+								<Text style={{ fontSize: 22, marginBottom: 10 }}>{result?.name}</Text>
+								<View style={styles.resultRow}>
+									<WeatherIcon
+										name={result?.weather[0].icon}
+										description={result?.weather[0].description}
+									/>
+									<ResultDetail label="Current" value={result.main?.temp}/>
 								</View>
 							</View>
 						)}
@@ -89,8 +93,6 @@ function AddCity({ visible = true, close }: Props) {
 		</Modal>
 	)
 }
-
-export default AddCity
 
 const styles = StyleSheet.create({
 	title: {
@@ -105,19 +107,32 @@ const styles = StyleSheet.create({
 		borderRadius: 14,
 		backgroundColor: '#f2f2f2',
 		paddingHorizontal: '5%',
-		marginTop: 20,
 		flexDirection: 'row',
+		marginTop: 20,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingVertical: 8,
 	},
 	result: {
-		borderWidth: 1,
-		paddingVertical: 10,
-		paddingHorizontal: 12,
+		paddingVertical: 20,
+		paddingHorizontal: '5%',
+		marginTop: 20,
+		shadowColor: 'black',
+		shadowOffset: { height: 1, width: 0 },
+		shadowRadius: 3,
+		shadowOpacity: 0.1,
+		borderRadius: 10,
+		width: '100%',
+		backgroundColor: '#fff',
+	},
+	resultRow: {
 		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		flex: 1,
 	},
 	tempUnit: {
 		fontSize: 14,
 	},
+	label: { fontSize: 12 },
 })
