@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'components'
 import { useAppContext } from 'hooks'
@@ -8,9 +8,10 @@ type Props = {
   label: string,
   value?: number,
   isTemp?: boolean,
+  cities: [],
 }
 
-export default function ResultDetail({ value = 0, label, isTemp = true }: Props): React$Element<React$ElementType> {
+export default function ResultDetail({ value = 0, label, isTemp = true, cities }: Props): React$Element<React$ElementType> {
   const { isFahrenheit } = useAppContext()
 
   return (

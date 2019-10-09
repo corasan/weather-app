@@ -8,14 +8,15 @@ import {
 	StyleSheet,
 	ScrollView,
 	TouchableWithoutFeedback,
+	TouchableOpacity,
 } from 'react-native'
 import { Text, ButtonClose } from 'components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDebounce } from 'hooks'
-import { getWeatherByCity } from '../../api'
 import { WeatherIcon } from 'components'
-import { useAppContext, useFetchSavedCities } from 'hooks'
+import { useFetchSavedCities } from 'hooks'
+import AsyncStorage from '@react-native-community/async-storage'
+import { getWeatherByCity } from '../../api'
 import ResultDetail from './ResultDetail'
 
 type Props = {
@@ -23,11 +24,19 @@ type Props = {
 	close(): void,
 }
 
+async function saveCity(cities: Array<any>, city: {}) {
+	try {
+		const save = JSON.stringify([city, ...cities])
+		await AsyncStorage.setItem('CloudMate:SavedCities', save)
+	} catch (err) {
+		console.log(err);
+	}
+}
+
 export default function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
 	const [result, setResult] = useState(null)
 	const debouncedSearch = useDebounce(search, 700)
-	const { isFahrenheit } = useAppContext()
 	const cities = useFetchSavedCities()
 	const searchInput: TextInput.propTypes = useRef(null)
 
@@ -76,16 +85,16 @@ export default function AddCity({ visible = true, close }: Props) {
 						</TouchableWithoutFeedback>
 
 						{result && (
-							<View style={styles.result}>
+							<TouchableOpacity style={styles.result} onPress={() => saveCity(cities, result)}>
 								<Text style={{ fontSize: 22, marginBottom: 10 }}>{result?.name}</Text>
 								<View style={styles.resultRow}>
 									<WeatherIcon
 										name={result?.weather[0].icon}
 										description={result?.weather[0].description}
 									/>
-									<ResultDetail label="Current" value={result.main?.temp}/>
+									<ResultDetail label="Current" value={result.main?.temp} cities={cities} />
 								</View>
-							</View>
+							</TouchableOpacity>
 						)}
 					</View>
 				</ScrollView>

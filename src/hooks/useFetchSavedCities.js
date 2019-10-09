@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
-import { getItem } from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage'
 
-export default async function useSaveCityLocal(city) {
-  const [cities, setCities] = useState(null);
+export default function useSaveCityLocal(city) {
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     async function getCities() {
       try {
-        const res = await getItem('SaveCities')
-        setCities(res)
+        const res = await AsyncStorage.getItem('CloudMate:SavedCities')
+
+        if (res !== null) {
+          setCities(JSON.parse(res))
+        }
       } catch (err) {
         console.log(err);
       }
@@ -16,6 +19,5 @@ export default async function useSaveCityLocal(city) {
 
     getCities()
   }, [])
-
   return cities
 }
