@@ -19,6 +19,7 @@ function App() {
 	const [temp, setTemp] = useState(0)
 	const [details, setDetails] = useState(null)
 	const [todayMinMax, setTodayMinMax] = useState()
+	const [savedCities, setSavedCities] = useState(null)
 
 	useEffect(() => {
 		const permissionUpdate = RNLocation.subscribeToPermissionUpdates(
@@ -67,6 +68,11 @@ function App() {
 		setLongitude(long)
 	}
 
+	const changeLocation = async (lat: number, long: number) => {
+		setLatitude(lat)
+		setLongitude(long)
+	}
+
 	useEffect(() => {
 		const getWeather = async () => {
 			const { main, name, weather: w } = await getWeatherByLocation(
@@ -104,6 +110,10 @@ function App() {
 		latitude,
 		longitude,
 		permission,
+		changeLocation,
+		setCurrentLocation,
+		savedCities,
+		setSavedCities,
 	}
 
 	return (
