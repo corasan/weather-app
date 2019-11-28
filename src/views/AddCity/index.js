@@ -60,6 +60,7 @@ export default function AddCity({ visible = true, close }: Props) {
 		const cities = [...savedCities, result]
 		await setItem(JSON.stringify(cities))
 		setSavedCities(uniqBy(cities, 'name'))
+		close()
 	}
 
 	function onClose() {
