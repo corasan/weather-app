@@ -5,7 +5,7 @@ This project started as a way for me to play around with native code and create 
 I still need to make improvements to the architecture and hide sensitive info like api keys. The archcitecture of the project is basically how I personally like to setup my personal projects.
 
 I'm using Microsoft App Center for OTA updates, distribution, and logging events. I'm planning of using Firebase for AdMob but not really sure what else I'm going to use it for in the future since I plan to implement more features.
-One of the features that I really wanted to implement was having a list of cities and users can select the city they wish to see the current weather for (similar to the iOS weather app). I'm using OpenWeather API to fetch weather data, and AsyncStorage to locally save the list of cities the user adds.
+One of the features that I really wanted to implement was having a list of cities and users can select the city they wish to see the current weather for (similar to the iOS weather app). I'm using OpenWeather API to fetch weather data, and AsyncStorage to locally save the list of cities the user adds. For state management I'm using the Context API.
 
 
 ## Run the app
