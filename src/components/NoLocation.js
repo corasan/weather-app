@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity, Linking } from 'react-native'
 import Text from 'components/Text'
 import assets from 'assets'
 
@@ -11,18 +11,24 @@ type Props = {
 }
 
 const setText = ({ permission, latitude, longitude }: Props): string => {
-  if (!permission && longitude && latitude) {
+  if (!permission && !longitude && !latitude) {
     return 'Please enable your location'
-  } else if (permission && !longitude && !latitude) {
-    return "Couldn't get your location"
   }
-  return 'Please enable your location'
+  return "Couldn't get your location"
 }
 
 const NoLocation = (props: Props): React$Element<any> => (
   <View style={styles.container}>
     <Text style={styles.text}>{setText(props)}</Text>
     <Image source={assets.sad} style={{ resizeMode: 'contain', height: 60 }} />
+
+    {!props?.permission && (
+      <TouchableOpacity style={{ marginTop: 60 }} activeOpacity={0.6} onPress={() => Linking.openURL('app-settings://')}>
+        <View style={styles.locationBtn}>
+          <Text style={{ color: '#fff', marginBottom: 1 }}>Enable location</Text>
+        </View>
+      </TouchableOpacity>
+    )}
   </View>
 )
 
@@ -36,6 +42,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 50,
     color: '#C0C0C0',
+  },
+  locationBtn: {
+    backgroundColor: '#0088f8',
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+    borderRadius: 100,
   },
 })
 

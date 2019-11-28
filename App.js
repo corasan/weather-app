@@ -22,7 +22,7 @@ function App() {
 
 	useEffect(() => {
 		const permissionUpdate = RNLocation.subscribeToPermissionUpdates(
-			handlePermissionUpdate
+			handlePermissionUpdate,
 		)
 		admob()
 		checkPermission()
@@ -71,7 +71,7 @@ function App() {
 		const getWeather = async () => {
 			const { main, name, weather: w } = await getWeatherByLocation(
 				latitude,
-				longitude
+				longitude,
 			)
 			const { list } = await getDailyForecastByLocation(latitude, longitude)
 			setTemp(main?.temp)

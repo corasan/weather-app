@@ -67,7 +67,7 @@ export default function AddCity({ visible = true, close }: Props) {
 		setResult(null)
 		close()
 	}
-	// debugger
+
 	return (
 		<Modal visible={visible} animationType="slide">
 			<SafeAreaView style={{ flex: 1 }}>
