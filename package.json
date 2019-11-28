@@ -5,12 +5,11 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "say -v 'Samantha' 'starting server' && react-native start",
+    "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
     "cp-staging": "say -v 'Samantha' 'codepushing to staging' && appcenter codepush release-react -a corasan/WeatherApp -s Staging",
-    "cp-prod": "say -v 'Samantha' 'codepushing to production' && appcenter codepush release-react -a corasan/WeatherApp -d Production",
-    "postinstall": "say -v 'Samantha' 'finished installing all dependencies'"
+    "cp-prod": "say -v 'Samantha' 'codepushing to production' && appcenter codepush release-react -a corasan/WeatherApp -d Production"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.3",
