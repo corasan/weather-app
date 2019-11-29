@@ -33,7 +33,7 @@ export default function Current() {
 		setSavedCities,
 	} = useAppContext()
 	const [addCityVisible, setAddCityVisible] = useState(false)
-	const unitId = __DEV__ ? TestIds.BANNER : AD_UNIT
+	const unitId = !__DEV__ ? AD_UNIT : TestIds.BANNER
 	const { getItem } = useAsyncStorage('@CloudMate:saved_cities')
 	const drawer = useRef(null)
 

@@ -1,1 +1,1 @@
-export const AD_UNIT = __DEV__ ? 'ca-app-pub-3940256099942544/2934735716' : 'ca-app-pub-6893917161539964/6701028197'
+export const AD_UNIT = 'ca-app-pub-6893917161539964/6440909449'
