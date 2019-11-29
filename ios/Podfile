@@ -30,24 +30,6 @@ target 'WeatherApp' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  
-  target 'WeatherAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
   use_native_modules!
-end
-
-target 'WeatherApp-tvOS' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for WeatherApp-tvOS
-
-  target 'WeatherApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end
