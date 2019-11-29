@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { FlatList } from 'react-native'
 import moment from 'moment'
 import { map, filter, groupBy, flatMap } from 'lodash'
-import { ForecastType } from '@types/weatherTypes'
+import { ForecastType } from 'propTypes/weatherTypes'
 import ForecastItem from './ForecastItem'
+import Context from '../../context'
 
 type Props = { data: [] }
 
 function Forecast({ data }: Props): React$Element<any> {
   const [days, setDays] = useState([])
+  const { setTodayMinMax } = useContext(Context)
 
   const formatDate = (date: string) => moment(date).format('dddd')
 
@@ -19,7 +21,8 @@ function Forecast({ data }: Props): React$Element<any> {
       return filter(item, ({ main }: ForecastType) => main.temp_max === Math.max(...a))
     })
     setDays(y)
-  }, [data])
+    setTodayMinMax(y[0])
+  }, [data, setTodayMinMax])
 
   return (
     <FlatList
