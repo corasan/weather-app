@@ -46,7 +46,6 @@ export default function Current() {
 			}
 		}
 
-		console.log('re-rendering Current.js')
 		fetchCitiesFromLocal()
 	}, [])
 
