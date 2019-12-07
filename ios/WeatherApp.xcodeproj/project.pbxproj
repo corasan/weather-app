@@ -153,7 +153,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WeatherApp" */;
 			buildPhases = (
-				BA3A2C6C239C481B003544D9 /* create config.js with env variables */,
 				5D64F978E485D1D8D8DB5363 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -338,24 +337,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		BA3A2C6C239C481B003544D9 /* create config.js with env variables */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "create config.js with env variables";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"export const OWM_API=${OWM_API}\" > ../config.js\necho \"export const API_URL=${API_URL}\" > ../config.js\necho \"export const AD_UNIT=${AD_UNIT}\" > ../config.js\n";
 		};
 		CA56EEF3232D9119006C36B0 /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
