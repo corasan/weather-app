@@ -19,7 +19,7 @@ function App() {
 	const [temp, setTemp] = useState(0)
 	const [details, setDetails] = useState(null)
 	const [todayMinMax, setTodayMinMax] = useState()
-	const [savedCities, setSavedCities] = useState(null)
+	const [savedCities, setSavedCities] = useState([])
 
 	useEffect(() => {
 		const permissionUpdate = RNLocation.subscribeToPermissionUpdates(

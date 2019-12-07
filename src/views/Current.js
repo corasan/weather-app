@@ -9,7 +9,7 @@ import AddCity from './AddCity'
 import { useAppContext } from 'hooks'
 import { SavedCities } from 'components'
 import MenuIcon from 'assets/MenuIcon'
-import { AD_UNIT } from '../constants'
+import { AD_UNIT } from '../../config'
 
 import {
 	CurrentTemp,
@@ -41,12 +41,14 @@ export default function Current() {
 		async function fetchCitiesFromLocal() {
 			const cities = await getItem()
 			if (cities !== null) {
-				setSavedCities(uniqBy(JSON.parse(cities)))
+				const theCities = JSON.parse(cities)
+				setSavedCities(theCities)
 			}
 		}
 
+		console.log('re-rendering Current.js')
 		fetchCitiesFromLocal()
-	}, [savedCities])
+	}, [])
 
 	const renderTopBar = () => (
 		<View style={styles.topBar}>
