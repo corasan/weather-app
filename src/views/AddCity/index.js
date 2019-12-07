@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import { Text, ButtonClose } from 'components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import { useDebounce } from 'hooks'
+import { useDebounce, useAppContext } from 'hooks'
 import { WeatherIcon } from 'components'
 import { useAsyncStorage } from '@react-native-community/async-storage'
 import { uniqBy } from 'lodash'
@@ -27,9 +27,9 @@ type Props = {
 export default function AddCity({ visible = true, close }: Props) {
 	const [search, setSearch] = useState('')
 	const [result, setResult] = useState(null)
-	const [savedCities, setSavedCities] = useState([])
+	const { savedCities, setSavedCities } = useAppContext()
 	const debouncedSearch = useDebounce(search, 700)
-	const { setItem, getItem } = useAsyncStorage('@CloudMate:saved_cities')
+	const { setItem } = useAsyncStorage('@CloudMate:saved_cities')
 	const searchInput: TextInput.propTypes = useRef(null)
 
 	useEffect(() => {
@@ -45,21 +45,12 @@ export default function AddCity({ visible = true, close }: Props) {
 		return () => setResult(null)
 	}, [debouncedSearch])
 
-	useEffect(() => {
-		async function fetchCitiesFromLocal() {
-			const cities = await getItem()
-			if (cities !== null) {
-				setSavedCities(uniqBy(JSON.parse(cities)))
-			}
-		}
-
-		fetchCitiesFromLocal()
-	}, [])
-
 	async function saveCity() {
-		const cities = [...savedCities, result]
+		const cities = [result, ...savedCities]
 		await setItem(JSON.stringify(cities))
 		setSavedCities(uniqBy(cities, 'name'))
+		setSearch('')
+		setResult(null)
 		close()
 	}
 
