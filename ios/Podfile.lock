@@ -318,14 +318,14 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - RNCAsyncStorage (1.6.3):
     - React
-  - RNFBAdMob (6.1.0):
+  - RNFBAdMob (6.2.0):
     - Firebase/AdMob (~> 6.13.0)
     - Firebase/Analytics (~> 6.13.0)
     - Firebase/Core (~> 6.13.0)
     - PersonalizedAdConsent
     - React
     - RNFBApp
-  - RNFBApp (6.1.0):
+  - RNFBApp (6.2.0):
     - Firebase/Core (~> 6.13.0)
     - React
   - RNGestureHandler (1.5.2):
@@ -523,8 +523,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCAsyncStorage: 3c304d1adfaea02ec732ac218801cb13897aa8c0
-  RNFBAdMob: f1d69d2076040c98f03fb180cca24e7bda818ca2
-  RNFBApp: edeadb99669dd39f9d7f8f7f68d420fda4d8b7d8
+  RNFBAdMob: 6bd7b601928d23a0b454252172fedbe746b0f7cc
+  RNFBApp: 5b215aacc09105a1761de31b9a0eb2abcce06253
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
