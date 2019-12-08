@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { BannerAd, TestIds, BannerAdSize } from '@react-native-firebase/admob'
 import { useAsyncStorage } from '@react-native-community/async-storage'
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout'
-import { uniqBy } from 'lodash'
 import AddCity from './AddCity'
 import { useAppContext } from 'hooks'
 import { SavedCities } from 'components'
@@ -46,6 +45,7 @@ export default function Current() {
 			}
 		}
 
+		StatusBar.setBarStyle('dark-content')
 		fetchCitiesFromLocal()
 	}, [])
 
