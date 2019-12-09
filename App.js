@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { StatusBar } from 'react-native'
 import RNLocation from 'react-native-location'
 import codePush from 'react-native-code-push'
 import Analytics from 'appcenter-analytics'
 import admob from '@react-native-firebase/admob'
+import { useAsyncStorage } from '@react-native-community/async-storage'
 import Navigation from './src/navigation'
 
-import { getWeatherByLocation, getDailyForecastByLocation } from './src/api'
+import { getWeatherByLocation, getDailyForecastByLocation, getWeatherByCity } from './src/api'
 import Context from './src/context'
 
 function App() {
@@ -20,13 +22,32 @@ function App() {
 	const [details, setDetails] = useState(null)
 	const [todayMinMax, setTodayMinMax] = useState()
 	const [savedCities, setSavedCities] = useState([])
+	const { getItem } = useAsyncStorage('@CloudMate:saved_cities')
 
 	useEffect(() => {
 		const permissionUpdate = RNLocation.subscribeToPermissionUpdates(
 			handlePermissionUpdate,
 		)
+
+		async function fetchCitiesFromLocal() {
+			const cities = await getItem()
+			if (cities !== null) {
+				const theCities = JSON.parse(cities)
+				setSavedCities(theCities)
+
+				if (!permission) {
+					const { lat, lon } = theCities[0]?.coord
+					changeLocation(lat, lon)
+				}
+			} else {
+				const nyc = await getWeatherByCity('New York')
+				changeLocation(nyc?.coord?.lat, nyc?.coord?.lon)
+			}
+		}
 		admob()
 		checkPermission()
+		fetchCitiesFromLocal()
+		StatusBar.setBarStyle('dark-content')
 
 		return function cleanup() {
 			permissionUpdate()
@@ -49,6 +70,26 @@ function App() {
 		}
 	}, [permission])
 
+	useEffect(() => {
+		const getWeather = async () => {
+			const { main, name, weather: w } = await getWeatherByLocation(
+				latitude,
+				longitude,
+				)
+			const { list } = await getDailyForecastByLocation(latitude, longitude)
+			setTemp(main?.temp)
+			setCity(name)
+			setWeather(w[0])
+			setForecast(list)
+			setDetails(main)
+			Analytics.trackEvent('Weather requested', { City: name })
+		}
+
+		if (latitude && longitude) {
+			getWeather()
+		}
+	}, [latitude, longitude])
+
 	const checkPermission = async () => {
 		const result = await RNLocation.checkPermission({ ios: 'whenInUse' })
 		setPermission(result)
@@ -69,29 +110,10 @@ function App() {
 	}
 
 	const changeLocation = async (lat: number, long: number) => {
+		console.log('change location', lat, long)
 		setLatitude(lat)
 		setLongitude(long)
 	}
-
-	useEffect(() => {
-		const getWeather = async () => {
-			const { main, name, weather: w } = await getWeatherByLocation(
-				latitude,
-				longitude,
-			)
-			const { list } = await getDailyForecastByLocation(latitude, longitude)
-			setTemp(main?.temp)
-			setCity(name)
-			setWeather(w[0])
-			setForecast(list)
-			setDetails(main)
-			Analytics.trackEvent('Weather requested', { City: name })
-		}
-
-		if (latitude && longitude) {
-			getWeather()
-		}
-	}, [latitude, longitude])
 
 	const toggleUnit = () => {
 		setIsFahrenheit(!isFahrenheit)
