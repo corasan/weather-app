@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { StyleSheet, View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { BannerAd, TestIds, BannerAdSize } from '@react-native-firebase/admob'
-import { useAsyncStorage } from '@react-native-community/async-storage'
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout'
 import AddCity from './AddCity'
 import { useAppContext } from 'hooks'
@@ -33,21 +32,7 @@ export default function Current() {
 	} = useAppContext()
 	const [addCityVisible, setAddCityVisible] = useState(false)
 	const unitId = !__DEV__ ? AD_UNIT : TestIds.BANNER
-	const { getItem } = useAsyncStorage('@CloudMate:saved_cities')
 	const drawer = useRef(null)
-
-	useEffect(() => {
-		async function fetchCitiesFromLocal() {
-			const cities = await getItem()
-			if (cities !== null) {
-				const theCities = JSON.parse(cities)
-				setSavedCities(theCities)
-			}
-		}
-
-		StatusBar.setBarStyle('dark-content')
-		fetchCitiesFromLocal()
-	}, [])
 
 	const renderTopBar = () => (
 		<View style={styles.topBar}>
@@ -78,7 +63,15 @@ export default function Current() {
 			ref={drawer}
 		>
 			<SafeAreaView style={{ flex: 1 }}>
-				{permission && (longitude && latitude) ? (
+				<View style={styles.container}>
+					{renderTopBar()}
+					<WeatherLocation city={city} />
+					<CurrentTemp weather={weather} temp={temp} />
+					{details && <WeatherDetails details={details} />}
+
+					<Forecast data={forecast} />
+				</View>
+				{/* {permission && (longitude && latitude) ? (
 					<View style={styles.container}>
 						{renderTopBar()}
 						<WeatherLocation city={city} />
@@ -93,7 +86,7 @@ export default function Current() {
 						latitude={latitude}
 						longitude={longitude}
 					/>
-				)}
+				)} */}
 
 				<AddCity
 					close={() => setAddCityVisible(false)}

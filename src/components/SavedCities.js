@@ -5,7 +5,7 @@ import { useAppContext } from 'hooks'
 import { uniqBy } from 'lodash'
 
 export default function SavedCities({ savedCities }) {
-  const { changeLocation, setCurrentLocation } = useAppContext()
+  const { changeLocation, setCurrentLocation, permission } = useAppContext()
   const data = uniqBy(savedCities, 'name')
 
   return (
@@ -28,13 +28,14 @@ export default function SavedCities({ savedCities }) {
                 </TouchableOpacity>
               )
             }}
-            ListHeaderComponent={<TouchableOpacity
+            ListHeaderComponent={permission && (
+              <TouchableOpacity
                 onPress={setCurrentLocation}
                 style={styles.btn}
               >
                 <Text style={styles.text}>Current city</Text>
               </TouchableOpacity>
-            }
+            )}
             keyExtractor={(index, key) => key.toString()}
           />
         )}
