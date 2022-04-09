@@ -19,7 +19,7 @@
     "appcenter-analytics": "^2.6.0",
     "appcenter-crashes": "^2.6.0",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "16.12.0",
     "react-native": "0.61.5",
     "react-native-code-push": "^5.7.0",
